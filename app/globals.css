@@ -4,8 +4,8 @@
 
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: ;
+  --foreground: ;
 }
 
 @theme inline {
@@ -16,17 +16,18 @@
   --font-poppins: var(--font-poppins), sans-serif;
   --font-edu: var(--font-edu), sans-serif;
 
-  --color-primary: #38bdf8;
-  --color-secondary: #64748b;
-  --color-dark: #0f172a;
-  --color-darkb: #1d293d;
-  --color-s100: #f1f5f9;
+  --color-olivegreen: #758952;
+  --color-olivegreen-hover: #637543;
+  --color-lightolive: #B5C49A;
+  --color-dustypink: #E8C0C5;
+  --color-pinkpale: #F4E2E4;
+  --color-ivory: #F6F7EC;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: ;
+    --foreground: ;
   }
 }
 
@@ -35,3 +36,7 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.hamburger-line {
+    @apply w-[35px] h-[2px] my-2 block bg-black transform rotate-0 translate-y-0 scale-100;
+  }
