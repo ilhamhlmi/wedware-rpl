@@ -1,3 +1,4 @@
+"use client"
 import Image from "next/image";
 import NavbarClient from "./components/NavbarClient";
 import hero2 from "@/public/hero/hero2.jpeg";
@@ -5,6 +6,16 @@ import hero2m from "@/public/hero/hero2m.jpeg";
 import Link from "next/link";
 
 export default function Home() {
+
+  const handleLogout = async () => {
+  await fetch("/api/logout", {
+    method: "POST",
+  });
+
+  window.location.href = "/login";
+};
+
+
   return (
     <div>
       <NavbarClient />
@@ -23,6 +34,12 @@ export default function Home() {
             <Link href="/" className="border font-poppins w-64 px-8 py-2 rounded-full text-white bg-primary border-white cursor-pointer hover:bg-ivory hover:text-olivegreen duration-200">
               Jadwalkan Fitting
             </Link>
+                    <button
+            onClick={handleLogout}
+            className="border rounded-full px-6 py-2 border-red-600 bg-red-600 hover:bg-red-800 duration-300 text-white"
+          >
+            Logout
+          </button>
           </div>
         </div>
       </section>

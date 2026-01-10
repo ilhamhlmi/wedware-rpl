@@ -31,8 +31,16 @@ export default function Login() {
       return;
     }
 
-    // Redirect sederhana
-    router.push("/");
+    // ✅ REDIRECT BERDASARKAN ROLE
+    const role = data.user.role;
+
+    if (role === "admin") {
+      router.replace("/admin");
+    } else if (role === "worker") {
+      router.replace("/worker/dashboard");
+    } else {
+      router.replace("/");
+    }
   };
 
   return (
