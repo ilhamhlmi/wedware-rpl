@@ -23,28 +23,28 @@ export default function WomensWear() {
                         <div className="border border-olivegreen flex flex-col justify-center items-center rounded-xl w-65">
                             <Image src={women1} alt="dummy" className="w-65 rounded-xl" />
                             <div className="flex w-full items-center justify-between px-4">
-                                <h1 className="font-poppins mt-3 mb-3">Women Dress 1</h1>
+                                <h1 className="font-poppins mt-3 mb-3">Busana Wanita 1</h1>
                                 <button className="font-poppins mt-3 mb-3 border rounded-full px-2 text-white border-olivegreen bg-olivegreen font-semibold text-lg cursor-pointer">+</button>
                             </div>
                         </div>
                         <div className="border border-olivegreen flex flex-col justify-center items-center rounded-xl w-65">
                             <Image src={women2} alt="dummy" className="w-65 rounded-xl" />
                             <div className="flex w-full items-center justify-between px-4">
-                                <h1 className="font-poppins mt-3 mb-3">Women Dress 2</h1>
+                                <h1 className="font-poppins mt-3 mb-3">Busana Wanita 2</h1>
                                 <button className="font-poppins mt-3 mb-3 border rounded-full px-2 text-white border-olivegreen bg-olivegreen font-semibold text-lg cursor-pointer">+</button>
                             </div>
                         </div>
                         <div className="border border-olivegreen flex flex-col justify-center items-center rounded-xl w-65">
                             <Image src={women3} alt="dummy" className="w-65 rounded-xl" />
                             <div className="flex w-full items-center justify-between px-4">
-                                <h1 className="font-poppins mt-3 mb-3">Women Dress 3</h1>
+                                <h1 className="font-poppins mt-3 mb-3">Busana Wanita 3</h1>
                                 <button className="font-poppins mt-3 mb-3 border rounded-full px-2 text-white border-olivegreen bg-olivegreen font-semibold text-lg cursor-pointer">+</button>
                             </div>
                         </div>
                         <div className="border border-olivegreen flex flex-col justify-center items-center rounded-xl w-65">
                             <Image src={women4} alt="dummy" className="w-65 rounded-xl" />
                             <div className="flex w-full items-center justify-between px-4">
-                                <h1 className="font-poppins mt-3 mb-3">Women Dress 4</h1>
+                                <h1 className="font-poppins mt-3 mb-3">Busana Wanita 4</h1>
                                 <button className="font-poppins mt-3 mb-3 border rounded-full px-2 text-white border-olivegreen bg-olivegreen font-semibold text-lg cursor-pointer">+</button>
                             </div>
                         </div>

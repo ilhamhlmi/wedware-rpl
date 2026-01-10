@@ -8,7 +8,6 @@ import CatalogNav from "@/app/components/Catalog";
 import acc1 from "@/public/catalog/accessories/acc1.jpg"
 import acc2 from "@/public/catalog/accessories/acc2.jpg"
 import acc3 from "@/public/catalog/accessories/acc3.jpg"
-import acc4 from "@/public/catalog/accessories/acc4.jpg"
 
 export default function Accessories() {
     const pathname = usePathname()
@@ -23,28 +22,28 @@ export default function Accessories() {
                         <div className="border border-olivegreen flex flex-col justify-center items-center rounded-xl w-65">
                             <Image src={acc1} alt="dummy" className="w-65 rounded-xl" />
                             <div className="flex w-full items-center justify-between px-4">
-                                <h1 className="font-poppins mt-3 mb-3">Accessories 1</h1>
+                                <h1 className="font-poppins mt-3 mb-3">Aksesori 1</h1>
                                 <button className="font-poppins mt-3 mb-3 border rounded-full px-2 text-white border-olivegreen bg-olivegreen font-semibold text-lg cursor-pointer">+</button>
                             </div>
                         </div>
                         <div className="border border-olivegreen flex flex-col justify-center items-center rounded-xl w-65">
                             <Image src={acc2} alt="dummy" className="w-65 rounded-xl" />
                             <div className="flex w-full items-center justify-between px-4">
-                                <h1 className="font-poppins mt-3 mb-3">Accessories 2</h1>
+                                <h1 className="font-poppins mt-3 mb-3">Aksesori 2</h1>
                                <button className="font-poppins mt-3 mb-3 border rounded-full px-2 text-white border-olivegreen bg-olivegreen font-semibold text-lg cursor-pointer">+</button>
                             </div>
                         </div>
                         <div className="border border-olivegreen flex flex-col justify-center items-center rounded-xl w-65">
                             <Image src={acc3} alt="dummy" className="w-65 rounded-xl" />
                             <div className="flex w-full items-center justify-between px-4">
-                                <h1 className="font-poppins mt-3 mb-3">Accessories 3</h1>
+                                <h1 className="font-poppins mt-3 mb-3">Aksesori 3</h1>
                                <button className="font-poppins mt-3 mb-3 border rounded-full px-2 text-white border-olivegreen bg-olivegreen font-semibold text-lg cursor-pointer">+</button>
                             </div>
                         </div>
                         <div className="border border-olivegreen flex flex-col justify-center items-center rounded-xl w-65">
                             <Image src={dummy} alt="dummy" className="w-65 rounded-xl" />
                             <div className="flex w-full items-center justify-between px-4">
-                                <h1 className="font-poppins mt-3 mb-3">Accessories 4</h1>
+                                <h1 className="font-poppins mt-3 mb-3">Aksesori 4</h1>
                                 <button className="font-poppins mt-3 mb-3 border rounded-full px-2 text-white border-olivegreen bg-olivegreen font-semibold text-lg cursor-pointer">+</button>
                             </div>
                         </div>

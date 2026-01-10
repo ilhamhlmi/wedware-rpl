@@ -3,7 +3,6 @@ import Image from "next/image";
 import Link from "next/link";
 import NavbarClient from "@/app/components/NavbarClient";
 import { usePathname } from "next/navigation";
-import dummy from "@/public/catalog/dummyproduct.jpg"
 import CatalogNav from "@/app/components/Catalog";
 import men1 from "@/public/catalog/menswear/man1.jpg"
 import men2 from "@/public/catalog/menswear/man2.jpg"
@@ -23,28 +22,28 @@ export default function MensWear() {
                         <div className="border border-olivegreen flex flex-col justify-center items-center rounded-xl w-65">
                             <Image src={men1} alt="dummy" className="w-65 rounded-xl" />
                             <div className="flex w-full items-center justify-between px-4">
-                                <h1 className="font-poppins mt-3 mb-3">Suit 1</h1>
+                                <h1 className="font-poppins mt-3 mb-3">Busana Pria 1</h1>
                                 <button className="font-poppins mt-3 mb-3 border rounded-full px-2 text-white border-olivegreen bg-olivegreen font-semibold text-lg cursor-pointer">+</button>
                             </div>
                         </div>
                         <div className="border border-olivegreen flex flex-col justify-center items-center rounded-xl w-65">
                             <Image src={men2} alt="dummy" className="w-65 rounded-xl" />
                             <div className="flex w-full items-center justify-between px-4">
-                                <h1 className="font-poppins mt-3 mb-3">Suit 2</h1>
+                                <h1 className="font-poppins mt-3 mb-3">Busana Pria 2</h1>
                                 <button className="font-poppins mt-3 mb-3 border rounded-full px-2 text-white border-olivegreen bg-olivegreen font-semibold text-lg cursor-pointer">+</button>
                             </div>
                         </div>
                         <div className="border border-olivegreen flex flex-col justify-center items-center rounded-xl w-65">
                             <Image src={men3} alt="dummy" className="w-65 rounded-xl" />
                             <div className="flex w-full items-center justify-between px-4">
-                                <h1 className="font-poppins mt-3 mb-3">Suit 3</h1>
+                                <h1 className="font-poppins mt-3 mb-3">Busana Pria 3</h1>
                                 <button className="font-poppins mt-3 mb-3 border rounded-full px-2 text-white border-olivegreen bg-olivegreen font-semibold text-lg cursor-pointer">+</button>
                             </div>
                         </div>
                         <div className="border border-olivegreen flex flex-col justify-center items-center rounded-xl w-65">
                             <Image src={men4} alt="dummy" className="w-65 rounded-xl" />
                             <div className="flex w-full items-center justify-between px-4">
-                                <h1 className="font-poppins mt-3 mb-3">Suit 4</h1>
+                                <h1 className="font-poppins mt-3 mb-3">Busana Pria 4</h1>
                                 <button className="font-poppins mt-3 mb-3 border rounded-full px-2 text-white border-olivegreen bg-olivegreen font-semibold text-lg cursor-pointer">+</button>
                             </div>
                         </div>

@@ -18,9 +18,9 @@ export function middleware(request: NextRequest) {
 
   // LOGIN PAGE GUARD
   if (pathname === "/login" && userId && userRole) {
-    if (userRole === "admin") {
-      return NextResponse.redirect(new URL("/admin", request.url));
-    }
+    // if (userRole === "admin") {
+    //   return NextResponse.redirect(new URL("/admin", request.url));
+    // }
 
     if (userRole === "worker") {
       return NextResponse.redirect(new URL("/worker/dashboard", request.url));
@@ -39,11 +39,11 @@ export function middleware(request: NextRequest) {
   }
 
   // ADMIN AREA
-  if (pathname.startsWith("/admin")) {
-    if (!userId || userRole !== "admin") {
-      return NextResponse.redirect(new URL("/login", request.url));
-    }
-  }
+  // if (pathname.startsWith("/admin")) {
+  //   if (!userId || userRole !== "admin") {
+  //     return NextResponse.redirect(new URL("/login", request.url));
+  //   }
+  // }
 
   // WORKER AREA
   if (pathname.startsWith("/worker")) {

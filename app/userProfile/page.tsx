@@ -29,9 +29,10 @@ export default function UserProfile() {
                         <h1 className="font-poppins text-neutral-900">********</h1>
                     </div>
                 </div>
-                <div className="px-6 space-y-3">
-                    <button className="border w-full rounded-full border-olivegreen bg-olivegreen text-ivory font-poppins py-1">Edit Profile</button>
-                    <button className="border w-full rounded-full border-red-500 bg-red-500 text-ivory font-poppins py-1">Logout</button>
+                <div className="px-6 mt-5 relative space-y-3 text-center">
+                    <Link href="/userProfile/editProfile" className="border w-full block rounded-full border-olivegreen bg-olivegreen text-ivory font-poppins py-1 hover:bg-olivegreen-hover hover:border-olivegreen-hover hover:shadow-xl cursor-pointer duration-200">Edit Profile</Link>
+                    <Link href="/" className="border w-full block rounded-full border-olivegreen bg-olivegreen text-ivory font-poppins py-1 hover:bg-olivegreen-hover hover:border-olivegreen-hover hover:shadow-xl cursor-pointer duration-200">Lihat Riwayat Peminjaman</Link>
+                    <button className="border w-full rounded-full border-red-500 bg-red-500 hover:bg-red-700 hover:border-red-700 duration-200 cursor-pointer hover:shadow-xl text-ivory font-poppins py-1">Logout</button>
                 </div>
             </div>
         </section>

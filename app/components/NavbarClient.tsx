@@ -37,12 +37,12 @@ export default function NavbarClient() {
                     </nav>
                 </div>
                 {isOpen && (
-                    <nav className="absolute left-5 right-5 top-[105%] px-8 py-5 border rounded-xl border-olivegreen bg-olivegreen/35 backdrop-blur-xl shadow-xl">
+                    <nav className="absolute left-5 right-5 top-[105%] px-8 py-5 border rounded-xl border-olivegreen bg-ivory shadow-2xl">
                         <div className="flex flex-col text-center text-s100 space-y-5">
-                            <Link href="/" className="text-lg font-semibold font-poppins text-white uppercase">Beranda</Link>
-                            <Link href="/about" className="text-lg font-semibold font-poppins text-white uppercase">Tentang Kami</Link>
-                            <Link href="/catalog" className="text-lg font-semibold font-poppins text-white uppercase">Katalog</Link>
-                            <Link href="/contact" className="text-lg font-semibold font-poppins text-white uppercase">Kontak</Link>
+                            <Link href="/" className="text-lg font-semibold font-poppins text-olivegreen uppercase">Beranda</Link>
+                            <Link href="/about" className="text-lg font-semibold font-poppins text-olivegreen uppercase">Tentang Kami</Link>
+                            <Link href="/catalog" className="text-lg font-semibold font-poppins text-olivegreen uppercase">Katalog</Link>
+                            <Link href="/contact" className="text-lg font-semibold font-poppins text-olivegreen uppercase">Kontak</Link>
                         </div>
                     </nav>
                 )}
@@ -57,7 +57,7 @@ export default function NavbarClient() {
                             <div className="space-x-8 flex items-center justify-enter">
                                 <Link href="/" className={pathname === '/' ? 'font-poppins font-semibold text-olivegreen uppercase' : 'font-poppins text-black hover:text-olivegreen uppercase'}>Beranda</Link>
                                 <Link href="/about" className={pathname === '/' ? 'font-poppins font-semibold text-olivegreen uppercase' : 'font-poppins text-black hover:text-olivegreen uppercase'}>Tentang kami</Link>
-                                <Link href="/catalog" className={pathname === '/catalog' || '/catalog/menswear' || '/catalog/womenswear' || '/catalog/accesories' ? 'font-poppins font-semibold text-olivegreen uppercase' : 'font-poppins text-black hover:text-olivegreen uppercase'}>Katalog</Link>
+                                <Link href="/catalog" className={pathname === '/catalog' ? 'font-poppins font-semibold text-olivegreen uppercase' : 'font-poppins text-black hover:text-olivegreen uppercase'}>Katalog</Link>
                                 <Link href="/contact" className={pathname === '/' ? 'font-poppins font-semibold text-olivegreen uppercase' : 'font-poppins text-black hover:text-olivegreen uppercase'}>Kontak</Link>
                                 <Link href="/login" className={pathname === '/signup' ? 'font-poppins font-semibold text-olivegreen uppercase' : 'font-poppins uppercase border px-2 py-1 rounded-xl border-olivegreen text-olivegreen hover:bg-olivegreen hover:text-white duration-200'}>Sign In</Link>
                                 <Link href="/userprofile">
