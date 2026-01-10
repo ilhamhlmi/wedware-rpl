@@ -38,5 +38,5 @@ body {
 }
 
 .hamburger-line {
-    @apply w-[35px] h-[2px] my-2 block bg-black transform rotate-0 translate-y-0 scale-100;
+    @apply w-8.75 h-0.5 my-2 block bg-black transform rotate-0 translate-y-0 scale-100;
   }
