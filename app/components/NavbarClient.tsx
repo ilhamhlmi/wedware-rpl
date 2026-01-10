@@ -59,7 +59,7 @@ export default function NavbarClient() {
                                 <Link href="/about" className={pathname === '/' ? 'font-poppins font-semibold text-olivegreen uppercase' : 'font-poppins text-black hover:text-olivegreen uppercase'}>Tentang kami</Link>
                                 <Link href="/catalog" className={pathname === '/catalog' || '/catalog/menswear' || '/catalog/womenswear' || '/catalog/accesories' ? 'font-poppins font-semibold text-olivegreen uppercase' : 'font-poppins text-black hover:text-olivegreen uppercase'}>Katalog</Link>
                                 <Link href="/contact" className={pathname === '/' ? 'font-poppins font-semibold text-olivegreen uppercase' : 'font-poppins text-black hover:text-olivegreen uppercase'}>Kontak</Link>
-                                <Link href="/login" className={pathname === '/' ? 'font-poppins font-semibold text-olivegreen uppercase' : 'font-poppins uppercase border px-2 py-1 rounded-xl border-olivegreen text-olivegreen hover:bg-olivegreen hover:text-white duration-200'}>Sign In</Link>
+                                <Link href="/login" className={pathname === '/signup' ? 'font-poppins font-semibold text-olivegreen uppercase' : 'font-poppins uppercase border px-2 py-1 rounded-xl border-olivegreen text-olivegreen hover:bg-olivegreen hover:text-white duration-200'}>Sign In</Link>
                                 <Link href="/userprofile">
                                     <div className="border p-1.5 rounded-full bg-olivegreen border-olivegreen">
                                         <Image src={userIcon} alt="userIcon" className="w-5"></Image>
