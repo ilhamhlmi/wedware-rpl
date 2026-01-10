@@ -15,7 +15,7 @@ export default function NavbarClient() {
         setIsOpen(!isOpen);
     };
     return (
-        // Mobile nav start
+        // Mobile mode start
         <header className="z-50 w-full fixed top-0 left-0 flex items-center bg-ivory shadow-md">
             <div className="container mx-auto">
                 <div className="lg:hidden">
@@ -39,13 +39,15 @@ export default function NavbarClient() {
                 {isOpen && (
                     <nav className="absolute left-5 right-5 top-[105%] px-8 py-5 border rounded-xl border-olivegreen bg-olivegreen/35 backdrop-blur-xl shadow-xl">
                         <div className="flex flex-col text-center text-s100 space-y-5">
-                            <Link href="/" className="text-lg font-semibold font-poppins text-white">Beranda</Link>
-                            <Link href="/about" className="text-lg font-semibold font-poppins text-white">Tentang Kami</Link>
-                            <Link href="/guide" className="text-lg font-semibold font-poppins text-white">Panduan</Link>
-                            <Link href="/layanan" className="text-lg font-semibold font-poppins text-white">Layanan Kami</Link>
+                            <Link href="/" className="text-lg font-semibold font-poppins text-white uppercase">Beranda</Link>
+                            <Link href="/about" className="text-lg font-semibold font-poppins text-white uppercase">Tentang Kami</Link>
+                            <Link href="/catalog" className="text-lg font-semibold font-poppins text-white uppercase">Katalog</Link>
+                            <Link href="/contact" className="text-lg font-semibold font-poppins text-white uppercase">Kontak</Link>
                         </div>
                     </nav>
                 )}
+                {/* Mobile mode end */}
+                {/* Desktop mode start */}
                 <div className="hidden lg:flex justify-center items-center">
                     <div className="container">
                         <nav className="py-5 px-6 flex items-center justify-between">
@@ -54,16 +56,16 @@ export default function NavbarClient() {
                             </div>
                             <div className="space-x-8">
                                 <Link href="/" className={pathname === '/' ? 'font-poppins font-semibold text-olivegreen uppercase' : 'font-poppins text-black hover:text-olivegreen uppercase'}>Beranda</Link>
-                                <Link href="/" className={pathname === '/' ? 'font-poppins font-semibold text-olivegreen uppercase' : 'font-poppins text-black hover:text-olivegreen'}>Katalog</Link>
-                                <Link href="/" className={pathname === '/' ? 'font-poppins font-semibold text-olivegreen uppercase' : 'font-poppins text-black hover:text-olivegreen uppercase'}>Kontak</Link>
-                                <Link href="/" className={pathname === '/' ? 'font-poppins font-semibold text-olivegreen uppercase' : 'font-poppins text-black hover:text-olivegreen uppercase'}>Empruy</Link>
-                                <Link href="/" className={pathname === '/' ? 'font-poppins font-semibold text-olivegreen uppercase' : 'font-poppins text-black hover:text-olivegreen uppercase'}>Sign In</Link>
+                                <Link href="/about" className={pathname === '/' ? 'font-poppins font-semibold text-olivegreen uppercase' : 'font-poppins text-black hover:text-olivegreen uppercase'}>Tentang kami</Link>
+                                <Link href="/catalog" className={pathname === '/catalog' || '/catalog/menswear' || '/catalog/womenswear' || '/catalog/accesories' ? 'font-poppins font-semibold text-olivegreen uppercase' : 'font-poppins text-black hover:text-olivegreen uppercase'}>Katalog</Link>
+                                <Link href="/contact" className={pathname === '/' ? 'font-poppins font-semibold text-olivegreen uppercase' : 'font-poppins text-black hover:text-olivegreen uppercase'}>Kontak</Link>
+                                <Link href="/login" className={pathname === '/' ? 'font-poppins font-semibold text-olivegreen uppercase' : 'font-poppins uppercase border px-2 py-1 rounded-xl border-olivegreen text-olivegreen hover:bg-olivegreen hover:text-white duration-200'}>Sign In</Link>
                             </div>
                         </nav>
                     </div>
                 </div>
+                {/* Desktop mode end */}
             </div>
         </header>
-        // Mobile nav end
     );
 }

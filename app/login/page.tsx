@@ -47,15 +47,17 @@ export default function Login() {
             <h1 className="font-edu text-3xl font-semibold text-ivory mb-6">Login</h1>
 
             <input
-              className="border-b w-2/3 mb-3 px-4 py-2 bg-transparent text-ivory"
+              className="border-b w-2/3 mb-3 px-4 py-2 bg-transparent text-ivory font-poppins focus:outline-none"
               placeholder="Username"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
+              autoComplete="off"
             />
 
             <input
               type="password"
-              className="border-b w-2/3 mb-3 px-4 py-2 bg-transparent text-ivory"
+              autoComplete="off"
+              className="border-b w-2/3 mb-3 px-4 py-2 bg-transparent text-ivory font-poppins focus:outline-none"
               placeholder="Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
@@ -64,13 +66,13 @@ export default function Login() {
             <button
               onClick={handleLogin}
               disabled={loading}
-              className="border rounded-full mt-2 px-6 py-2 w-2/3 bg-primary text-ivory"
+              className="border rounded-full mt-2 px-6 py-2 w-2/3 bg-primary text-ivory font-poppins"
             >
               {loading ? "Loading..." : "Login"}
             </button>
 
-            <p className="text-sm text-ivory mt-3">
-              Not registered yet? <Link href="/signup">Sign Up</Link>
+            <p className="text-sm text-ivory mt-3 font-poppins">
+              Not registered yet? <Link href="/signup" className="font-semibold">Sign Up</Link>
             </p>
           </div>
         </div>

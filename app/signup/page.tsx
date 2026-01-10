@@ -50,27 +50,27 @@ export default function SignUp() {
           <div className="w-full flex flex-col items-center max-w-md bg-ivory/5 backdrop-blur-2xl rounded-2xl shadow-md py-5">
             <h1 className="font-edu text-3xl font-semibold text-ivory mb-6">Sign Up</h1>
 
-            <input name="email" placeholder="Email" onChange={handleChange}
-              className="border-b w-2/3 mb-3 px-4 py-2 bg-transparent text-ivory" />
+            <input name="email" placeholder="Email" onChange={handleChange} autoComplete="off"
+              className="border-b w-2/3 mb-3 px-4 py-2 bg-transparent text-ivory font-poppins focus:outline-none" />
 
-            <input name="phone" placeholder="Phone Number" onChange={handleChange}
-              className="border-b w-2/3 mb-3 px-4 py-2 bg-transparent text-ivory" />
+            <input name="phone" placeholder="Phone Number" onChange={handleChange} autoComplete="off"
+              className="border-b w-2/3 mb-3 px-4 py-2 bg-transparent text-ivory font-poppins focus:outline-none" />
 
-            <input name="username" placeholder="Username" onChange={handleChange}
-              className="border-b w-2/3 mb-3 px-4 py-2 bg-transparent text-ivory" />
+            <input name="username" placeholder="Username" onChange={handleChange} autoComplete="off"
+              className="border-b w-2/3 mb-3 px-4 py-2 bg-transparent text-ivory font-poppins focus:outline-none" />
 
-            <input type="password" name="password" placeholder="Password" onChange={handleChange}
-              className="border-b w-2/3 mb-3 px-4 py-2 bg-transparent text-ivory" />
+            <input type="password" name="password" placeholder="Password" onChange={handleChange} autoComplete="off"
+              className="border-b w-2/3 mb-3 px-4 py-2 bg-transparent text-ivory font-poppins focus:outline-none" />
 
             <button
               onClick={handleSignup}
-              className="border rounded-full mt-2 px-6 py-2 w-2/3 bg-primary text-ivory"
+              className="border rounded-full mt-2 px-6 py-2 w-2/3 bg-primary text-ivory font-poppins"
             >
               Create Account
             </button>
 
-            <p className="text-sm text-ivory mt-3">
-              Already have an account? <Link href="/login">Login</Link>
+            <p className="text-sm text-ivory mt-3 font-poppins">
+              Already have an account? <Link href="/login" className="font-poppins font-semibold">Login</Link>
             </p>
           </div>
         </div>
