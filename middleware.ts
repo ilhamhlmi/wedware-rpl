@@ -4,51 +4,64 @@ import type { NextRequest } from "next/server";
 export function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
 
-  const userId = request.cookies.get("user_id")?.value;
-  const userRole = request.cookies.get("user_role")?.value;
+  // USER COOKIE
+  const userId = request.cookies.get("user_id_user")?.value;
+  const userRole = request.cookies.get("user_role_user")?.value;
 
-    // contoh path nanti
-//   // USER ROUTES
-//   const userRoutes = [
-//     "/guide",
-//     "/konsultasi",
-//     "/userProfile",
-//     "/homeService",
-//   ];
+  // ADMIN COOKIE
+  const adminId = request.cookies.get("user_id_admin")?.value;
+  const adminRole = request.cookies.get("user_role_admin")?.value;
 
-  // LOGIN PAGE GUARD
-  if (pathname === "/login" && userId && userRole) {
-    if (userRole === "admin") {
-      return NextResponse.redirect(new URL("/admin", request.url));
-    }
+  // WORKER COOKIE
+  const workerId = request.cookies.get("user_id_worker")?.value;
+  const workerRole = request.cookies.get("user_role_worker")?.value;
 
-    if (userRole === "worker") {
-      return NextResponse.redirect(new URL("/worker/dashboard", request.url));
-    }
+  /* LOGIN PAGE GUARD */
 
-    if (userRole === "user") {
+  // USER LOGIN
+  if (pathname === "/login") {
+    if (userId && userRole === "user") {
       return NextResponse.redirect(new URL("/", request.url));
     }
+    return NextResponse.next();
   }
 
-  // USER AREA
+  // ADMIN LOGIN
+  if (pathname === "/admin/login") {
+    if (adminId && adminRole === "admin") {
+      return NextResponse.redirect(new URL("/admin", request.url));
+    }
+    return NextResponse.next();
+  }
+
+  // WORKER LOGIN
+  if (pathname === "/worker/login") {
+    if (workerId && workerRole === "worker") {
+      return NextResponse.redirect(
+        new URL("/worker/dashboard", request.url)
+      );
+    }
+    return NextResponse.next();
+  }
+
+  /* USER AREA */
   if (pathname.startsWith("/user")) {
     if (!userId || userRole !== "user") {
       return NextResponse.redirect(new URL("/login", request.url));
     }
   }
 
-  // ADMIN AREA
+  /* ADMIN AREA */
   if (pathname.startsWith("/admin")) {
-    if (!userId || userRole !== "admin") {
-      return NextResponse.redirect(new URL("/login", request.url));
+    if (!adminId || adminRole !== "admin") {
+      return NextResponse.redirect(new URL("/admin/login", request.url));
     }
   }
 
-  // WORKER AREA
+  /* WORKER AREA */
   if (pathname.startsWith("/worker")) {
-    if (!userId || userRole !== "worker") {
-      return NextResponse.redirect(new URL("/login", request.url));
+    if (!workerId || workerRole !== "worker") {
+      return NextResponse.redirect(new URL("/worker/login", request.url));
     }
   }
 
@@ -59,8 +72,9 @@ export const config = {
   matcher: [
     "/login",
     "/user/:path*",
+    "/admin/login",
     "/admin/:path*",
+    "/worker/login",
     "/worker/:path*",
   ],
 };
-

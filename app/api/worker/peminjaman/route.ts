@@ -5,8 +5,8 @@ import { cookies } from "next/headers";
 export async function GET() {
   try {
     const cookieStore = await cookies();
-    const workerId = cookieStore.get("user_id")?.value;
-    const role = cookieStore.get("user_role")?.value;
+    const workerId = cookieStore.get("user_id_worker")?.value;
+    const role = cookieStore.get("user_role_worker")?.value;
 
     if (!workerId || role !== "worker") {
       return NextResponse.json(
@@ -15,7 +15,7 @@ export async function GET() {
       );
     }
 
-    //  Ambil data worker
+    // Ambil data worker
     const [workerRows]: any = await pool.query(
       "SELECT id, username FROM users WHERE id = ? AND role = 'worker'",
       [workerId]
@@ -30,7 +30,7 @@ export async function GET() {
 
     const worker = workerRows[0];
 
-    //  Ambil peminjaman
+    // Ambil peminjaman
     const [rows] = await pool.query(
       `
       SELECT 

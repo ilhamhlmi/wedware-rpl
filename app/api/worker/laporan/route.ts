@@ -2,23 +2,27 @@ import { NextResponse } from "next/server";
 import pool from "@/lib/db";
 import path from "path";
 import fs from "fs/promises";
+import { cookies } from "next/headers";
 
 export async function POST(req: Request) {
   try {
     const formData = await req.formData();
 
     const peminjamanId = formData.get("peminjaman_id");
-    const workerId = formData.get("worker_id");
     const file = formData.get("bukti_pembayaran") as File | null;
 
-    if (!peminjamanId || !workerId || !file) {
+    const cookieStore = await cookies();
+    const workerId = cookieStore.get("user_id_worker")?.value;
+    const role = cookieStore.get("user_role_worker")?.value;
+
+    if (!peminjamanId || !file || !workerId || role !== "worker") {
       return NextResponse.json(
-        { message: "Data tidak lengkap" },
+        { message: "Data tidak lengkap / Unauthorized" },
         { status: 400 }
       );
     }
 
-    //  AMBIL DATA PEMINJAMAN 
+    // Ambil data peminjaman
     const [rows] = await pool.query(
       `
       SELECT 
@@ -43,7 +47,7 @@ export async function POST(req: Request) {
       );
     }
 
-    //  SIMPAN FILE 
+    // Simpan file
     const buffer = Buffer.from(await file.arrayBuffer());
     const fileName = `bukti-${Date.now()}-${file.name}`;
     const uploadDir = path.join(process.cwd(), "public/uploads");
@@ -51,7 +55,7 @@ export async function POST(req: Request) {
     await fs.mkdir(uploadDir, { recursive: true });
     await fs.writeFile(path.join(uploadDir, fileName), buffer);
 
-    //  SIMPAN LAPORAN 
+    // Simpan laporan
     await pool.query(
       `
       INSERT INTO laporan_worker

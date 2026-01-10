@@ -13,13 +13,13 @@ export async function POST(req: Request) {
     }
 
     const [rows] = await pool.query(
-      "SELECT id, username, email, password FROM users WHERE username = ? AND role = 'user'",
+      "SELECT id, username, email, password FROM users WHERE username = ? AND role = 'worker'",
       [username]
     );
 
-    const user = (rows as any[])[0];
+    const worker = (rows as any[])[0];
 
-    if (!user || user.password !== password) {
+    if (!worker || worker.password !== password) {
       return NextResponse.json(
         { message: "Username atau password salah" },
         { status: 401 }
@@ -31,15 +31,15 @@ export async function POST(req: Request) {
       { status: 200 }
     );
 
-    response.cookies.set("user_id", String(user.id), {
-      httpOnly: true,
-      path: "/",
-    });
+response.cookies.set("user_id_worker", String(worker.id), {
+  httpOnly: true,
+  path: "/",
+});
 
-    response.cookies.set("user_role", "user", {
-      httpOnly: true,
-      path: "/",
-    });
+response.cookies.set("user_role_worker", "worker", {
+  httpOnly: true,
+  path: "/",
+});
 
     return response;
   } catch (error) {

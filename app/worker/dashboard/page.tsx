@@ -46,7 +46,7 @@ useEffect(() => {
     if (!authChecked) return;
 
     if (!workerId || workerRole !== "worker") {
-      window.location.href = "/login";
+      window.location.href = "/worker/login";
     }
   }, [authChecked, workerId, workerRole]);
 
@@ -87,7 +87,7 @@ useEffect(() => {
   };
 
   const logout = async () => {
-    await fetch("/api/logout");
+    await fetch("/api/worker/logout");
     window.location.href = "/login";
   };
 
