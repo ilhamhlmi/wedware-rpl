@@ -2,68 +2,132 @@
 import Link from "next/link";
 import Image from "next/image";
 import NavbarClient from "../components/NavbarClient";
+import { useEffect, useState } from "react";
+import { getCart, removeFromCart, CartItem } from "@/utils/cart";
 
 export default function Order() {
-    return (
-        <section className="min-h-screen w-full flex items-center px-6 pt-32 pb-16">
-            <NavbarClient />
-            <div className="container mx-auto bg-olivegreen flex items-center justify-center rounded-xl p-6">
-                <div className="flex flex-col w-full">
-                    <div className="flex items-center text-center justify-center mb-10">
-                        <h1 className="font-edu text-ivory text-5xl font-semibold">Your Order</h1>
-                    </div>
-                    <div className="flex flex-col items-center justify-center">
-                        <div className="flex flex-col w-full xl:w-1/2 space-y-2">
-                            <div className="border flex justify-between items-center p-3 rounded-xl bg-lightolive border-lightolive">
-                                <button className="font-poppins text-white border-red-500 bg-red-500 border px-2 cursor-pointer rounded-full">X</button>
-                                <h1 className="font-poppins text-white">Nama Barang</h1>
-                                <h1 className="font-poppins text-white">x2</h1>
-                            </div>
-                            <div className="border flex justify-between items-center p-3 rounded-xl bg-lightolive border-lightolive">
-                                <button className="font-poppins text-white border-red-500 bg-red-500 border px-2 cursor-pointer rounded-full">X</button>
-                                <h1 className="font-poppins text-white">Nama Barang</h1>
-                                <h1 className="font-poppins text-white">x2</h1>
-                            </div>
-                            <div className="border flex justify-between items-center p-3 rounded-xl bg-lightolive border-lightolive">
-                                <button className="font-poppins text-white border-red-500 bg-red-500 border px-2 cursor-pointer rounded-full">X</button>
-                                <h1 className="font-poppins text-white">Nama Barang</h1>
-                                <h1 className="font-poppins text-white">x2</h1>
-                            </div>
-                            <div className="border flex justify-between items-center p-3 rounded-xl bg-lightolive border-lightolive">
-                                <button className="font-poppins text-white border-red-500 bg-red-500 border px-2 cursor-pointer rounded-full">X</button>
-                                <h1 className="font-poppins text-white">Nama Barang</h1>
-                                <h1 className="font-poppins text-white">x2</h1>
-                            </div>
-                            <div className="border flex justify-between items-center p-3 rounded-xl bg-lightolive border-lightolive">
-                                <textarea className="w-full focus:outline-none font-poppins text-white" placeholder="Your Address"/>
-                            </div>
-                            <div className="border flex justify-between items-center p-3 rounded-xl bg-lightolive border-lightolive">
-                                <label htmlFor="" className="border bg-white rounded-xl p-1 border-white text-center font-poppins mr-3 text-olivegreen w-full">Fitting Date</label>
-                                <input type="date" className="w-full focus:outline-none font-poppins text-white" placeholder="Your Address"/>
-                            </div>
-                            <div className="border flex justify-between items-center p-3 rounded-xl bg-lightolive border-lightolive">
-                                <label htmlFor="" className="border bg-white rounded-xl p-1 border-white text-center font-poppins mr-3 text-olivegreen w-full">Fitting Time</label>
-                                <input type="time" className="w-full focus:outline-none font-poppins text-white" placeholder="Your Address"/>
-                            </div>
-                            <div className="border flex justify-between items-center p-3 rounded-xl bg-lightolive border-lightolive">
-                                <label htmlFor="" className="border bg-white rounded-xl p-1 border-white text-center font-poppins mr-3 text-olivegreen w-full">Wedding Date</label>
-                                <input type="date" className="w-full focus:outline-none font-poppins text-white" placeholder="Your Address"/>
-                            </div>
-                            <div className="border flex justify-between items-center p-3 rounded-xl bg-lightolive border-lightolive">
-                                <label htmlFor="" className="border bg-white rounded-xl p-1 border-white text-center font-poppins mr-3 text-olivegreen w-full">Wedding Time</label>
-                                <input type="time" className="w-full focus:outline-none font-poppins text-white" placeholder="Your Address"/>
-                            </div>
-                            <div className="border flex justify-between items-center p-3 rounded-xl bg-lightolive border-lightolive">
-                                <label htmlFor="" className="border bg-white rounded-xl p-1 border-white text-center font-poppins mr-3 text-olivegreen w-full">Return Date</label>
-                                <input type="date" className="w-full focus:outline-none font-poppins text-white" placeholder="Your Address"/>
-                            </div>
-                            <div className="w-full border mt-5 text-center font-poppins text-white text-lg rounded-xl bg-green-500 border-green-500 cursor-pointer hover:border-green-700 hover:bg-green-700 duration-200 hover:shadow-xl">
-                                <button>Submit</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    )
+  const [cart, setCart] = useState<CartItem[]>([]);
+
+  //  FORM STATE 
+  const [address, setAddress] = useState("");
+  const [fittingDate, setFittingDate] = useState("");
+  const [fittingTime, setFittingTime] = useState("");
+  const [weddingDate, setWeddingDate] = useState("");
+  const [weddingTime, setWeddingTime] = useState("");
+  const [returnDate, setReturnDate] = useState("");
+
+  useEffect(() => {
+    setCart(getCart());
+  }, []);
+
+    //  SUBMIT HANDLER
+    
+   const handleSubmit = async () => {
+      if (!cart.length) {
+    alert("Cart kosong");
+    return;
+  }
+    const formData = new FormData();
+
+    formData.append("address", address);
+    formData.append("fittingDate", fittingDate);
+    formData.append("fittingTime", fittingTime);
+    formData.append("weddingDate", weddingDate);
+    formData.append("weddingTime", weddingTime);
+    formData.append("returnDate", returnDate);
+    formData.append("items", JSON.stringify(cart));
+
+    // if (file) {
+    //   formData.append("file", file);
+    // }
+
+    const res = await fetch("/api/orders", {
+      method: "POST",
+      body: formData, // JANGAN set Content-Type manual
+    });
+
+  if (!res.ok) {
+    alert("Gagal submit order");
+    return;
+  }
+
+  alert("Order berhasil dikirim");
+};
+
+
+  return (
+    <section className="min-h-screen w-full flex items-center px-6 pt-32 pb-16">
+      <NavbarClient />
+
+      <div className="container mx-auto bg-olivegreen rounded-xl p-6">
+        <h1 className="font-edu text-ivory text-5xl text-center mb-10">
+          Your Order
+        </h1>
+
+        {cart.length === 0 && (
+          <p className="text-white text-center">Your cart is empty</p>
+        )}
+
+        {cart.map((item) => (
+          <div
+            key={item.id}
+            className="border flex justify-between items-center p-3 rounded-xl bg-lightolive mb-2"
+          >
+            <button
+              onClick={() => {
+                removeFromCart(item.id);
+                setCart(getCart());
+              }}
+              className="bg-red-500 text-white px-2 rounded-full"
+            >
+              X
+            </button>
+
+            <span className="text-white">{item.name}</span>
+            <span className="text-white">x{item.qty}</span>
+          </div>
+        ))}
+
+        {/* ADDRESS */}
+        <div className="border p-3 rounded-xl bg-lightolive mt-4">
+          <textarea
+            className="w-full bg-transparent text-white focus:outline-none"
+            placeholder="Your Address"
+            value={address}
+            onChange={(e) => setAddress(e.target.value)}
+          />
+        </div>
+
+        {/* DATES */}
+        <div className="border p-3 rounded-xl bg-lightolive mt-2">
+          <input type="date" value={fittingDate} onChange={(e) => setFittingDate(e.target.value)} />
+        </div>
+
+        <div className="border p-3 rounded-xl bg-lightolive mt-2">
+          <input type="time" value={fittingTime} onChange={(e) => setFittingTime(e.target.value)} />
+        </div>
+
+        <div className="border p-3 rounded-xl bg-lightolive mt-2">
+          <input type="date" value={weddingDate} onChange={(e) => setWeddingDate(e.target.value)} />
+        </div>
+
+        <div className="border p-3 rounded-xl bg-lightolive mt-2">
+          <input type="time" value={weddingTime} onChange={(e) => setWeddingTime(e.target.value)} />
+        </div>
+
+        <div className="border p-3 rounded-xl bg-lightolive mt-2">
+          <input type="date" value={returnDate} onChange={(e) => setReturnDate(e.target.value)} />
+        </div>
+
+        {/* SUBMIT */}
+        <button
+          onClick={handleSubmit}
+          className="w-full mt-6 bg-green-500 text-white rounded-xl py-3 hover:bg-green-600"
+        >
+          Submit
+        </button>
+      </div>
+    </section>
+  );
 }
+

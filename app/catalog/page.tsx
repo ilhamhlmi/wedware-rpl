@@ -9,6 +9,8 @@ import dress1 from "@/public/catalog/weddingdress/dress1.jpg"
 import dress2 from "@/public/catalog/weddingdress/dress2.jpg"
 import dress3 from "@/public/catalog/weddingdress/dress3.jpg"
 import dress4 from "@/public/catalog/weddingdress/dress4.jpg"
+import { addToCart } from "@/utils/cart";
+
 
 export default function Catalog() {
     const pathname = usePathname()
@@ -24,28 +26,73 @@ export default function Catalog() {
                             <Image src={dress1} alt="dummy" className="w-65 rounded-xl" />
                             <div className="flex w-full items-center justify-between px-4">
                                 <h1 className="font-poppins mt-3 mb-3">Wedding Dress 1</h1>
-                                <button className="font-poppins mt-3 mb-3 border rounded-full px-2 text-white border-olivegreen bg-olivegreen font-semibold text-lg cursor-pointer">+</button>
+                                <button
+                                onClick={() =>
+                                    addToCart({
+                                        id: "dress-1",
+                                        name: "Wedding Dress 1",
+                                        image: dress1.src,
+                                    })
+                                } className="font-poppins mt-3 mb-3 border rounded-full px-2 text-white border-olivegreen bg-olivegreen font-semibold text-lg cursor-pointer">
+                                +
+                            </button>
                             </div>
                         </div>
                         <div className="border border-olivegreen flex flex-col justify-center items-center rounded-xl w-65">
                             <Image src={dress2} alt="dummy" className="w-65 rounded-xl" />
                             <div className="flex w-full items-center justify-between px-4">
                                 <h1 className="font-poppins mt-3 mb-3">Wedding Dress 2</h1>
-                                <button className="font-poppins mt-3 mb-3 border rounded-full px-2 text-white border-olivegreen bg-olivegreen font-semibold text-lg cursor-pointer">+</button>
+                                <button
+                                    onClick={() =>
+                                        addToCart({
+                                            id: "dress-2",
+                                            name: "Wedding Dress 2",
+                                            image: dress2.src,
+                                        })
+                                    }
+                                    className="font-poppins mt-3 mb-3 border rounded-full px-2 text-white border-olivegreen bg-olivegreen font-semibold text-lg cursor-pointer"
+                                >
+                                    +
+                                </button>
+
                             </div>
                         </div>
                         <div className="border border-olivegreen flex flex-col justify-center items-center rounded-xl w-65">
                             <Image src={dress3} alt="dummy" className="w-65 rounded-xl" />
                             <div className="flex w-full items-center justify-between px-4">
                                 <h1 className="font-poppins mt-3 mb-3">Wedding Dress 3</h1>
-                                <button className="font-poppins mt-3 mb-3 border rounded-full px-2 text-white border-olivegreen bg-olivegreen font-semibold text-lg cursor-pointer">+</button>
+                                <button
+                                    onClick={() =>
+                                        addToCart({
+                                            id: "dress-3",
+                                            name: "Wedding Dress 3",
+                                            image: dress3.src,
+                                        })
+                                    }
+                                    className="font-poppins mt-3 mb-3 border rounded-full px-2 text-white border-olivegreen bg-olivegreen font-semibold text-lg cursor-pointer"
+                                >
+                                    +
+                                </button>
+
                             </div>
                         </div>
                         <div className="border border-olivegreen flex flex-col justify-center items-center rounded-xl w-65">
                             <Image src={dress4} alt="dummy" className="w-65 rounded-xl" />
                             <div className="flex w-full items-center justify-between px-4">
                                 <h1 className="font-poppins mt-3 mb-3">Wedding Dress 4</h1>
-                                <button className="font-poppins mt-3 mb-3 border rounded-full px-2 text-white border-olivegreen bg-olivegreen font-semibold text-lg cursor-pointer">+</button>
+                                <button
+                                    onClick={() =>
+                                        addToCart({
+                                            id: "dress-4",
+                                            name: "Wedding Dress 4",
+                                            image: dress4.src,
+                                        })
+                                    }
+                                    className="font-poppins mt-3 mb-3 border rounded-full px-2 text-white border-olivegreen bg-olivegreen font-semibold text-lg cursor-pointer"
+                                >
+                                    +
+                                </button>
+
                             </div>
                         </div>
                     </div>
