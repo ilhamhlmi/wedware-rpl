@@ -9,7 +9,7 @@ import men2 from "@/public/catalog/menswear/man2.jpg"
 import men3 from "@/public/catalog/menswear/man3.jpg"
 import men4 from "@/public/catalog/menswear/man4.jpg"
 import { addToCart } from "@/utils/cart";
-import FooterClient from "../components/FooterClient";
+import FooterClient from "@/app/components/FooterClient";
 
 
 export default function MensWear() {

@@ -10,8 +10,7 @@ import women2 from "@/public/catalog/womenswear/women2.jpg"
 import women3 from "@/public/catalog/womenswear/women3.jpg"
 import women4 from "@/public/catalog/womenswear/women4.jpg"
 import { addToCart } from "@/utils/cart";
-import FooterClient from "../components/FooterClient";
-
+import FooterClient from "@/app/components/FooterClient";
 
 export default function WomensWear() {
     const pathname = usePathname()
