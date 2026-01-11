@@ -2,7 +2,7 @@
 import Link from "next/link";
 import Image from "next/image";
 
-export default function Order() {
+export default function TambahProduk() {
     return (
         <section className="min-h-screen w-full flex items-center px-6 pt-16 pb-16">
             <div className="container mx-auto bg-olivegreen flex items-center justify-center rounded-xl p-6">

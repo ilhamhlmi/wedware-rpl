@@ -29,6 +29,9 @@ export default function AdminNavbar() {
                             <Link href="/admin/datapengguna" className={pathname === '/admin/datapengguna' ? 'font-poppins font-semibold text-white uppercase' : 'font-poppins text-black hover:text-white uppercase'}>
                                 PENGGUNA
                             </Link>
+                            <Link href="/admin/ulasan" className={pathname === '/admin/ulasan' ? 'font-poppins font-semibold text-white uppercase' : 'font-poppins text-black hover:text-white uppercase'}>
+                                ULASAN
+                            </Link>
                             <Link href="/contact" className={pathname === '/' ? 'font-poppins font-semibold text-white uppercase' : 'font-poppins text-black hover:text-white uppercase'}>
                                 LAPORAN WORKER
                             </Link>
@@ -57,7 +60,7 @@ export default function AdminNavbar() {
                             </div>
                             <div className="border p-5 rounded-xl bg-lightolive shadow-md">
                                 <div>
-                                    <h1 className="font-poppins text-gray-700">Pemninjaman Menunggu</h1>
+                                    <h1 className="font-poppins text-gray-700">Peminjaman Menunggu</h1>
                                 </div>
                                 <div>
                                     <h1 className="font-poppins text-neutral-900 text-3xl">13</h1>
