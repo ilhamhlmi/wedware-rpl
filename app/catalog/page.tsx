@@ -9,6 +9,7 @@ import dress1 from "@/public/catalog/weddingdress/dress1.jpg"
 import dress2 from "@/public/catalog/weddingdress/dress2.jpg"
 import dress3 from "@/public/catalog/weddingdress/dress3.jpg"
 import dress4 from "@/public/catalog/weddingdress/dress4.jpg"
+import FooterClient from "../components/FooterClient";
 
 export default function Catalog() {
     const pathname = usePathname()
@@ -75,6 +76,7 @@ export default function Catalog() {
                     </div>
                 </div>
             </section>
+            <FooterClient />
         </div>
     );
 }

@@ -22,6 +22,7 @@
   --color-dustypink: #E8C0C5;
   --color-pinkpale: #F4E2E4;
   --color-ivory: #F6F7EC;
+  --color-pinkpale: #F4E2E4;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -40,3 +41,43 @@ body {
 .hamburger-line {
     @apply w-8.75 h-0.5 my-2 block bg-black transform rotate-0 translate-y-0 scale-100;
   }
+
+.marquee-track {
+  display: flex;
+  width: fit-content;
+  animation: marquee 45s linear infinite;
+}
+
+.marquee-track:hover,
+.marquee-track:hover * {
+  animation-play-state: paused;
+}
+
+@keyframes marquee {
+  from {
+    transform: translate3d(-50%, 0, 0);
+  }
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes marquee-left {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.marquee-track-left {
+  display: flex;
+  width: fit-content;
+  animation: marquee-left 45s linear infinite;
+}
+
+.marquee-track-left:hover,
+.marquee-track-left:hover * {
+  animation-play-state: paused;
+}

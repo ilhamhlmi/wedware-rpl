@@ -8,6 +8,7 @@ import men1 from "@/public/catalog/menswear/man1.jpg"
 import men2 from "@/public/catalog/menswear/man2.jpg"
 import men3 from "@/public/catalog/menswear/man3.jpg"
 import men4 from "@/public/catalog/menswear/man4.jpg"
+import FooterClient from "@/app/components/FooterClient";
 
 export default function MensWear() {
     const pathname = usePathname()
@@ -74,6 +75,7 @@ export default function MensWear() {
                     </div>
                 </div>
             </section>
+            <FooterClient />
         </div>
     );
 }

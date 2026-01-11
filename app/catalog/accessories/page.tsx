@@ -8,6 +8,7 @@ import CatalogNav from "@/app/components/Catalog";
 import acc1 from "@/public/catalog/accessories/acc1.jpg"
 import acc2 from "@/public/catalog/accessories/acc2.jpg"
 import acc3 from "@/public/catalog/accessories/acc3.jpg"
+import FooterClient from "@/app/components/FooterClient";
 
 export default function Accessories() {
     const pathname = usePathname()
@@ -62,6 +63,7 @@ export default function Accessories() {
                     </div>
                 </div>
             </section>
+            <FooterClient />
         </div>
     );
 }
