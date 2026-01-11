@@ -3,13 +3,14 @@ import Image from "next/image";
 import Link from "next/link";
 import NavbarClient from "@/app/components/NavbarClient";
 import { usePathname } from "next/navigation";
-import dummy from "@/public/catalog/dummyproduct.jpg"
 import CatalogNav from "@/app/components/Catalog";
 import men1 from "@/public/catalog/menswear/man1.jpg"
 import men2 from "@/public/catalog/menswear/man2.jpg"
 import men3 from "@/public/catalog/menswear/man3.jpg"
 import men4 from "@/public/catalog/menswear/man4.jpg"
 import { addToCart } from "@/utils/cart";
+import FooterClient from "../components/FooterClient";
+
 
 export default function MensWear() {
     const pathname = usePathname()
@@ -23,22 +24,30 @@ export default function MensWear() {
                     <div className="grid grid-cols-1 xl:grid-cols-4 gap-y-5 xl:gap-y-0 px-6 justify-items-center">
                         <div className="border border-olivegreen flex flex-col justify-center items-center rounded-xl w-65">
                             <Image src={men1} alt="dummy" className="w-65 rounded-xl" />
+                            <div className="flex w-full items-center justify-between px-4 mt-3">
+                                <h1 className="font-poppins">Busana Pria 1</h1>
+                                <button className="font-poppins  border rounded-full px-2 text-white border-olivegreen bg-olivegreen font-semibold text-lg cursor-pointer">+</button>
+                            </div>
                             <div className="flex w-full items-center justify-between px-4">
                                 <h1 className="font-poppins mt-3 mb-3">Suit 1</h1>
-                                                                <button
-                                onClick={() =>
-                                    addToCart({
-                                        id: "dress-1",
-                                        name: "Suit 1",
-                                        image: men1.src,
-                                    })
-                                } className="font-poppins mt-3 mb-3 border rounded-full px-2 text-white border-olivegreen bg-olivegreen font-semibold text-lg cursor-pointer">
-                                +
-                            </button>
+                                <button
+                                    onClick={() =>
+                                        addToCart({
+                                            id: "dress-1",
+                                            name: "Suit 1",
+                                            image: men1.src,
+                                        })
+                                    } className="font-poppins mt-3 mb-3 border rounded-full px-2 text-white border-olivegreen bg-olivegreen font-semibold text-lg cursor-pointer">
+                                    +
+                                </button>
                             </div>
                         </div>
                         <div className="border border-olivegreen flex flex-col justify-center items-center rounded-xl w-65">
                             <Image src={men2} alt="dummy" className="w-65 rounded-xl" />
+                            <div className="flex w-full items-center justify-between px-4 mt-3">
+                                <h1 className="font-poppins">Busana Pria 2</h1>
+                                <button className="font-poppins  border rounded-full px-2 text-white border-olivegreen bg-olivegreen font-semibold text-lg cursor-pointer">+</button>
+                            </div>
                             <div className="flex w-full items-center justify-between px-4">
                                 <h1 className="font-poppins mt-3 mb-3">Suit 2</h1>
                                 <button
@@ -56,6 +65,10 @@ export default function MensWear() {
                         </div>
                         <div className="border border-olivegreen flex flex-col justify-center items-center rounded-xl w-65">
                             <Image src={men3} alt="dummy" className="w-65 rounded-xl" />
+                            <div className="flex w-full items-center justify-between px-4 mt-3">
+                                <h1 className="font-poppins">Busana Pria 3</h1>
+                                <button className="font-poppins  border rounded-full px-2 text-white border-olivegreen bg-olivegreen font-semibold text-lg cursor-pointer">+</button>
+                            </div>
                             <div className="flex w-full items-center justify-between px-4">
                                 <h1 className="font-poppins mt-3 mb-3">Suit 3</h1>
                                 <button
@@ -73,6 +86,10 @@ export default function MensWear() {
                         </div>
                         <div className="border border-olivegreen flex flex-col justify-center items-center rounded-xl w-65">
                             <Image src={men4} alt="dummy" className="w-65 rounded-xl" />
+                            <div className="flex w-full items-center justify-between px-4 mt-3">
+                                <h1 className="font-poppins">Busana Pria 4</h1>
+                                <button className="font-poppins  border rounded-full px-2 text-white border-olivegreen bg-olivegreen font-semibold text-lg cursor-pointer">+</button>
+                            </div>
                             <div className="flex w-full items-center justify-between px-4">
                                 <h1 className="font-poppins mt-3 mb-3">Suit 4</h1>
                                 <button
@@ -86,11 +103,13 @@ export default function MensWear() {
                                     className="font-poppins mt-3 mb-3 border rounded-full px-2 text-white border-olivegreen bg-olivegreen font-semibold text-lg cursor-pointer"
                                 >
                                     +
-                                </button>                            </div>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </section>
+            <FooterClient />
         </div>
     );
 }

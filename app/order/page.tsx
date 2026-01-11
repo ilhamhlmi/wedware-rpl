@@ -20,13 +20,13 @@ export default function Order() {
     setCart(getCart());
   }, []);
 
-    //  SUBMIT HANDLER
-    
-   const handleSubmit = async () => {
-      if (!cart.length) {
-    alert("Cart kosong");
-    return;
-  }
+  //  SUBMIT HANDLER
+
+  const handleSubmit = async () => {
+    if (!cart.length) {
+      alert("Cart kosong");
+      return;
+    }
     const formData = new FormData();
 
     formData.append("address", address);
@@ -46,13 +46,13 @@ export default function Order() {
       body: formData, // JANGAN set Content-Type manual
     });
 
-  if (!res.ok) {
-    alert("Gagal submit order");
-    return;
-  }
+    if (!res.ok) {
+      alert("Gagal submit order");
+      return;
+    }
 
-  alert("Order berhasil dikirim");
-};
+    alert("Order berhasil dikirim");
+  };
 
 
   return (

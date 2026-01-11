@@ -10,6 +10,8 @@ import acc2 from "@/public/catalog/accessories/acc2.jpg"
 import acc3 from "@/public/catalog/accessories/acc3.jpg"
 import acc4 from "@/public/catalog/accessories/acc4.jpg"
 import { addToCart } from "@/utils/cart";
+import FooterClient from "@/app/components/FooterClient";
+
 
 export default function Accessories() {
     const pathname = usePathname()
@@ -94,6 +96,7 @@ export default function Accessories() {
                     </div>
                 </div>
             </section>
+            <FooterClient />
         </div>
     );
 }

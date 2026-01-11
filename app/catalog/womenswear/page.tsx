@@ -10,6 +10,8 @@ import women2 from "@/public/catalog/womenswear/women2.jpg"
 import women3 from "@/public/catalog/womenswear/women3.jpg"
 import women4 from "@/public/catalog/womenswear/women4.jpg"
 import { addToCart } from "@/utils/cart";
+import FooterClient from "../components/FooterClient";
+
 
 export default function WomensWear() {
     const pathname = usePathname()
@@ -23,6 +25,10 @@ export default function WomensWear() {
                     <div className="grid grid-cols-1 xl:grid-cols-4 gap-y-5 xl:gap-y-0 px-6 justify-items-center">
                         <div className="border border-olivegreen flex flex-col justify-center items-center rounded-xl w-65">
                             <Image src={women1} alt="dummy" className="w-65 rounded-xl" />
+                            <div className="flex w-full items-center justify-between px-4 mt-3">
+                                <h1 className="font-poppins">Busana Wanita 1</h1>
+                                <button className="font-poppins  border rounded-full px-2 text-white border-olivegreen bg-olivegreen font-semibold text-lg cursor-pointer">+</button>
+                            </div>
                             <div className="flex w-full items-center justify-between px-4">
                                 <h1 className="font-poppins mt-3 mb-3">Women Dress 1</h1>
                                 <button
@@ -40,6 +46,10 @@ export default function WomensWear() {
                         </div>
                         <div className="border border-olivegreen flex flex-col justify-center items-center rounded-xl w-65">
                             <Image src={women2} alt="dummy" className="w-65 rounded-xl" />
+                            <div className="flex w-full items-center justify-between px-4 mt-3">
+                                <h1 className="font-poppins">Busana Wanita 2</h1>
+                                <button className="font-poppins  border rounded-full px-2 text-white border-olivegreen bg-olivegreen font-semibold text-lg cursor-pointer">+</button>
+                            </div>
                             <div className="flex w-full items-center justify-between px-4">
                                 <h1 className="font-poppins mt-3 mb-3">Women Dress 2</h1>
                                 <button
@@ -57,6 +67,10 @@ export default function WomensWear() {
                         </div>
                         <div className="border border-olivegreen flex flex-col justify-center items-center rounded-xl w-65">
                             <Image src={women3} alt="dummy" className="w-65 rounded-xl" />
+                            <div className="flex w-full items-center justify-between px-4 mt-3">
+                                <h1 className="font-poppins">Busana Wanita 3</h1>
+                                <button className="font-poppins  border rounded-full px-2 text-white border-olivegreen bg-olivegreen font-semibold text-lg cursor-pointer">+</button>
+                            </div>
                             <div className="flex w-full items-center justify-between px-4">
                                 <h1 className="font-poppins mt-3 mb-3">Women Dress 3</h1>
                                 <button
@@ -74,6 +88,10 @@ export default function WomensWear() {
                         </div>
                         <div className="border border-olivegreen flex flex-col justify-center items-center rounded-xl w-65">
                             <Image src={women4} alt="dummy" className="w-65 rounded-xl" />
+                            <div className="flex w-full items-center justify-between px-4 mt-3">
+                                <h1 className="font-poppins">Busana Wanita 4</h1>
+                                <button className="font-poppins  border rounded-full px-2 text-white border-olivegreen bg-olivegreen font-semibold text-lg cursor-pointer">+</button>
+                            </div>
                             <div className="flex w-full items-center justify-between px-4">
                                 <h1 className="font-poppins mt-3 mb-3">Women Dress 4</h1>
                                 <button
@@ -87,11 +105,13 @@ export default function WomensWear() {
                                     className="font-poppins mt-3 mb-3 border rounded-full px-2 text-white border-olivegreen bg-olivegreen font-semibold text-lg cursor-pointer"
                                 >
                                     +
-                                </button>                            </div>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </section>
+            <FooterClient />
         </div>
     );
 }
