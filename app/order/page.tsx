@@ -59,36 +59,37 @@ export default function Order() {
     <section className="min-h-screen w-full flex items-center px-6 pt-32 pb-16">
       <NavbarClient />
 
-      <div className="container mx-auto bg-olivegreen rounded-xl p-6">
+      <div className="container mx-auto bg-olivegreen rounded-xl p-6 xl:max-w-2/3">
         <h1 className="font-edu text-ivory text-5xl text-center mb-10">
           Your Order
         </h1>
 
-        {cart.length === 0 && (
-          <p className="text-white text-center">Your cart is empty</p>
-        )}
+        <div className="space-y-2">
+          {cart.length === 0 && (
+            <p className="text-center font-poppins text-ivory">Keranjang masih kosong</p>
+          )}
 
-        {cart.map((item) => (
-          <div
-            key={item.id}
-            className="border flex justify-between items-center p-3 rounded-xl bg-lightolive mb-2"
-          >
-            <button
-              onClick={() => {
-                removeFromCart(item.id);
-                setCart(getCart());
-              }}
-              className="bg-red-500 text-white px-2 rounded-full"
+          {cart.map((item) => (
+            <div
+              key={item.id}
+              className="border flex justify-between items-center p-3 rounded-xl bg-lightolive mb-2"
             >
-              X
-            </button>
+              <button
+                onClick={() => {
+                  removeFromCart(item.id);
+                  setCart(getCart());
+                }}
+                className="bg-red-500 text-white px-2 rounded-full"
+              >
+                X
+              </button>
 
-            <span className="text-white">{item.name}</span>
-            <span className="text-white">x{item.qty}</span>
-          </div>
-        ))}
+              <span className="text-white">{item.name}</span>
+              <span className="text-white">x{item.qty}</span>
+            </div>
+          ))}
 
-        {/* ADDRESS */}
+          {/* ADDRESS
         <div className="border p-3 rounded-xl bg-lightolive mt-4">
           <textarea
             className="w-full bg-transparent text-white focus:outline-none"
@@ -96,36 +97,62 @@ export default function Order() {
             value={address}
             onChange={(e) => setAddress(e.target.value)}
           />
-        </div>
+        </div> */}
 
-        {/* DATES */}
+          <div className="border flex justify-between items-center p-3 rounded-xl bg-lightolive border-lightolive">
+            <textarea value={address} onChange={(e) => setAddress(e.target.value)} className="w-full focus:outline-none font-poppins text-white" placeholder="Your Address" />
+          </div>
+
+          {/* DATES
         <div className="border p-3 rounded-xl bg-lightolive mt-2">
           <input type="date" value={fittingDate} onChange={(e) => setFittingDate(e.target.value)} />
-        </div>
+        </div> */}
 
-        <div className="border p-3 rounded-xl bg-lightolive mt-2">
+          <div className="border flex justify-between items-center p-3 rounded-xl bg-lightolive border-lightolive">
+            <label htmlFor="" className="border bg-white rounded-xl p-1 border-white text-center font-poppins mr-3 text-olivegreen w-full">Fitting Date</label>
+            <input value={fittingDate} onChange={(e) => setFittingDate(e.target.value)} type="date" className="w-full focus:outline-none font-poppins text-white" placeholder="Your Address" />
+          </div>
+
+          {/* <div className="border p-3 rounded-xl bg-lightolive mt-2">
           <input type="time" value={fittingTime} onChange={(e) => setFittingTime(e.target.value)} />
-        </div>
+        </div> */}
 
-        <div className="border p-3 rounded-xl bg-lightolive mt-2">
+          <div className="border flex justify-between items-center p-3 rounded-xl bg-lightolive border-lightolive">
+            <label htmlFor="" className="border bg-white rounded-xl p-1 border-white text-center font-poppins mr-3 text-olivegreen w-full">Fitting Time</label>
+            <input value={fittingTime} onChange={(e) => setFittingTime(e.target.value)} type="time" className="w-full focus:outline-none font-poppins text-white" placeholder="Your Address" />
+          </div>
+
+          {/* <div className="border p-3 rounded-xl bg-lightolive mt-2">
           <input type="date" value={weddingDate} onChange={(e) => setWeddingDate(e.target.value)} />
-        </div>
+        </div> */}
 
-        <div className="border p-3 rounded-xl bg-lightolive mt-2">
+          <div className="border flex justify-between items-center p-3 rounded-xl bg-lightolive border-lightolive">
+            <label htmlFor="" className="border bg-white rounded-xl p-1 border-white text-center font-poppins mr-3 text-olivegreen w-full">Wedding Date</label>
+            <input value={weddingDate} onChange={(e) => setWeddingDate(e.target.value)} type="date" className="w-full focus:outline-none font-poppins text-white" placeholder="Your Address" />
+          </div>
+
+          {/* <div className="border p-3 rounded-xl bg-lightolive mt-2">
           <input type="time" value={weddingTime} onChange={(e) => setWeddingTime(e.target.value)} />
-        </div>
+        </div> */}
 
-        <div className="border p-3 rounded-xl bg-lightolive mt-2">
+          <div className="border flex justify-between items-center p-3 rounded-xl bg-lightolive border-lightolive">
+            <label htmlFor="" className="border bg-white rounded-xl p-1 border-white text-center font-poppins mr-3 text-olivegreen w-full">Wedding Time</label>
+            <input value={weddingTime} onChange={(e) => setWeddingTime(e.target.value)} type="time" className="w-full focus:outline-none font-poppins text-white" placeholder="Your Address" />
+          </div>
+
+          {/* <div className="border p-3 rounded-xl bg-lightolive mt-2">
           <input type="date" value={returnDate} onChange={(e) => setReturnDate(e.target.value)} />
+        </div> */}
+
+          <div className="border flex justify-between items-center p-3 rounded-xl bg-lightolive border-lightolive">
+            <label htmlFor="" className="border bg-white rounded-xl p-1 border-white text-center font-poppins mr-3 text-olivegreen w-full">Return Date</label>
+            <input value={returnDate} onChange={(e) => setReturnDate(e.target.value)} type="date" className="w-full focus:outline-none font-poppins text-white" placeholder="Your Address" />
+          </div>
+
+          {/* SUBMIT */}
+            <button className="w-full border  text-center font-poppins text-white text-lg rounded-xl bg-green-500 border-green-500 cursor-pointer hover:border-green-700 hover:bg-green-700 duration-200 hover:shadow-xl py-1" onClick={handleSubmit}>Submit</button>
         </div>
 
-        {/* SUBMIT */}
-        <button
-          onClick={handleSubmit}
-          className="w-full mt-6 bg-green-500 text-white rounded-xl py-3 hover:bg-green-600"
-        >
-          Submit
-        </button>
       </div>
     </section>
   );
