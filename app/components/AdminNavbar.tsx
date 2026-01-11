@@ -23,13 +23,10 @@ export default function AdminNavbar() {
                             <Link href="/admin/dashboard" className={pathname === '/admin/dashboard' ? 'font-poppins font-semibold text-white uppercase' : 'font-poppins text-black hover:text-white uppercase'}>
                                 Dashboard
                             </Link>
-                            <Link href="/about" className={pathname === '/about' ? 'font-poppins font-semibold text-white uppercase' : 'font-poppins text-black hover:text-white uppercase'}>
+                            <Link href="/admin/produk" className={pathname === '/admin/produk' ? 'font-poppins font-semibold text-white uppercase' : 'font-poppins text-black hover:text-white uppercase'}>
                                 PRODUK
                             </Link>
-                            <Link href="/catalog" className={pathname === '/catalog' ? 'font-poppins font-semibold text-white uppercase' : 'font-poppins text-black hover:text-white uppercase'}>
-                                PENGGUNA
-                            </Link>
-                            <Link href="/catalog" className={pathname === '/catalog' ? 'font-poppins font-semibold text-white uppercase' : 'font-poppins text-black hover:text-white uppercase'}>
+                            <Link href="/admin/datapengguna" className={pathname === '/admin/datapengguna' ? 'font-poppins font-semibold text-white uppercase' : 'font-poppins text-black hover:text-white uppercase'}>
                                 PENGGUNA
                             </Link>
                             <Link href="/contact" className={pathname === '/' ? 'font-poppins font-semibold text-white uppercase' : 'font-poppins text-black hover:text-white uppercase'}>
@@ -52,7 +49,7 @@ export default function AdminNavbar() {
                         <div className="grid grid-cols-4 gap-x-5 mt-3">
                             <div className="border p-5 rounded-xl bg-lightolive shadow-md">
                                 <div>
-                                    <h1 className="font-poppins text-gray-700">Total User</h1>
+                                    <h1 className="font-poppins text-gray-700">Total Pengguna Terdaftar</h1>
                                 </div>
                                 <div>
                                     <h1 className="font-poppins text-neutral-900 text-3xl">13</h1>
@@ -60,7 +57,7 @@ export default function AdminNavbar() {
                             </div>
                             <div className="border p-5 rounded-xl bg-lightolive shadow-md">
                                 <div>
-                                    <h1 className="font-poppins text-gray-700">Total User</h1>
+                                    <h1 className="font-poppins text-gray-700">Pemninjaman Menunggu</h1>
                                 </div>
                                 <div>
                                     <h1 className="font-poppins text-neutral-900 text-3xl">13</h1>
@@ -68,7 +65,7 @@ export default function AdminNavbar() {
                             </div>
                             <div className="border p-5 rounded-xl bg-lightolive shadow-md">
                                 <div>
-                                    <h1 className="font-poppins text-gray-700">Total User</h1>
+                                    <h1 className="font-poppins text-gray-700">Peminjaman Berlangsung</h1>
                                 </div>
                                 <div>
                                     <h1 className="font-poppins text-neutral-900 text-3xl">13</h1>
@@ -76,7 +73,7 @@ export default function AdminNavbar() {
                             </div>
                             <div className="border p-5 rounded-xl bg-lightolive shadow-md">
                                 <div>
-                                    <h1 className="font-poppins text-gray-700">Total User</h1>
+                                    <h1 className="font-poppins text-gray-700">Peminjaman Selesai</h1>
                                 </div>
                                 <div>
                                     <h1 className="font-poppins text-neutral-900 text-3xl">13</h1>

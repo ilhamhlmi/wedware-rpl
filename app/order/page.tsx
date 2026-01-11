@@ -57,7 +57,7 @@ export default function Order() {
                                 <label htmlFor="" className="border bg-white rounded-xl p-1 border-white text-center font-poppins mr-3 text-olivegreen w-full">Return Date</label>
                                 <input type="date" className="w-full focus:outline-none font-poppins text-white" placeholder="Your Address"/>
                             </div>
-                            <div className="w-full border mt-5 text-center font-poppins text-white text-lg rounded-xl bg-green-500 border-green-500 cursor-pointer hover:border-green-700 hover:bg-green-700 duration-200 hover:shadow-xl">
+                            <div className="w-full border  text-center font-poppins text-white text-lg rounded-xl bg-green-500 border-green-500 cursor-pointer hover:border-green-700 hover:bg-green-700 duration-200 hover:shadow-xl py-1">
                                 <button>Submit</button>
                             </div>
                         </div>
