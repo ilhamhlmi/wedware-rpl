@@ -75,7 +75,7 @@ export default function NavbarClient() {
                                     <span className="hamburger-line"></span>
                                 </button>
                                 <Link href="/" className="font-edu text-2xl text-black font-semibold">WedWare</Link>
-                                <Link href="/userprofile">
+                                <Link href="/userProfile">
                                     <div className="border p-2 rounded-full bg-olivegreen border-olivegreen">
                                         <Image src={userIcon} alt="userIcon" className="w-5" />
                                     </div>
@@ -127,7 +127,7 @@ export default function NavbarClient() {
                                     <Link href="/" className={pathname === '/' ? 'font-poppins font-semibold text-olivegreen uppercase' : 'font-poppins text-black hover:text-olivegreen uppercase'}>Beranda</Link>
                                     <Link href="/catalog" className={pathname === '/catalog' ? 'font-poppins font-semibold text-olivegreen uppercase' : 'font-poppins text-black hover:text-olivegreen uppercase'}>Katalog</Link>
                                     <Link href="/contact" className={pathname === '/contact' ? 'font-poppins font-semibold text-olivegreen uppercase' : 'font-poppins text-black hover:text-olivegreen uppercase'}>Kontak</Link>
-                                    <Link href="/userprofile">
+                                    <Link href="/userProfile">
                                         <div className="border p-1.5 rounded-full bg-olivegreen border-olivegreen">
                                             <Image src={userIcon} alt="userIcon" className="w-5" />
                                         </div>
