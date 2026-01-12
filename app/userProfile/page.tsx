@@ -1,8 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
-
 
 export default function UserProfile() {
     return (
@@ -31,7 +29,8 @@ export default function UserProfile() {
                 </div>
                 <div className="px-6 mt-5 relative space-y-3 text-center">
                     <Link href="/userProfile/editProfile" className="border w-full block rounded-full border-olivegreen bg-olivegreen text-ivory font-poppins py-1 hover:bg-olivegreen-hover hover:border-olivegreen-hover hover:shadow-xl cursor-pointer duration-200">Edit Profile</Link>
-                    <Link href="/" className="border w-full block rounded-full border-olivegreen bg-olivegreen text-ivory font-poppins py-1 hover:bg-olivegreen-hover hover:border-olivegreen-hover hover:shadow-xl cursor-pointer duration-200">Lihat Riwayat Peminjaman</Link>
+                    <Link href="/userProfile/riwayatuser" className="border w-full block rounded-full border-olivegreen bg-olivegreen text-ivory font-poppins py-1 hover:bg-olivegreen-hover hover:border-olivegreen-hover hover:shadow-xl cursor-pointer duration-200">Lihat Riwayat Peminjaman</Link>
+                    <Link href="/" className="border w-full block rounded-full border-olivegreen bg-olivegreen text-ivory font-poppins py-1 hover:bg-olivegreen-hover hover:border-olivegreen-hover hover:shadow-xl cursor-pointer duration-200">Kembali</Link>
                     <button className="border w-full rounded-full border-red-500 bg-red-500 hover:bg-red-700 hover:border-red-700 duration-200 cursor-pointer hover:shadow-xl text-ivory font-poppins py-1">Logout</button>
                 </div>
             </div>
