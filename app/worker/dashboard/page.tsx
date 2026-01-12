@@ -113,8 +113,8 @@ export default function WorkerDashboard() {
         </h1>
 
         <div className="bg-ivory/10 backdrop-blur-2xl rounded-2xl shadow-xl p-6 md:p-8">
-          <h2 className="text-lg text-center font-semibold mb-6">
-            Form Laporan Order
+          <h2 className="text-lg text-center font-semibold mb-6 font-poppins">
+            Laporan Worker
           </h2>
 
           <select
@@ -176,13 +176,13 @@ export default function WorkerDashboard() {
 
               <button
                 onClick={submitLaporan}
-                className="w-full py-3 rounded-full bg-primary text-white"
+                className="w-full py-3 rounded-full bg-primary border bg-olivegreen border-olivegreen hover:bg-olivegreen-hover hover:border-olivegreen-hover cursor-pointer text-white duration-200"
               >
                 Kirim Laporan
               </button>
                           <button
               onClick={handleLogout}
-              className="w-full bg-primary border rounded-full px-6 py-2 border-red-600 bg-red-600 hover:bg-red-800 duration-300 text-white "
+              className="w-full bg-primary border rounded-full px-6 py-2 border-red-500 bg-red-500 hover:bg-red-700 duration-200 text-white font-poppins cursor-pointer"
             >
               Logout
             </button>

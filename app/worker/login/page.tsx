@@ -65,13 +65,13 @@ export default function WorkerLogin() {
             <button
               onClick={handleLogin}
               disabled={loading}
-              className="border rounded-full mt-2 px-6 py-2 w-2/3 bg-primary text-ivory font-poppins"
+              className="border rounded-full mt-2 px-6 py-2 font-poppins border-primary bg-primary hover:bg-olivegreen hover:border-olivegreen shadow-md hover:shadow-2xl duration-300 text-ivory cursor-pointer w-2/3"
             >
               {loading ? "Loading..." : "Login"}
             </button>
 
             <p className="text-sm text-ivory mt-3 font-poppins">
-              Back to <Link href="/" className="font-semibold">Home</Link>
+              Back to <Link href="/" className="font-semibold font-poppins">Home</Link>
             </p>
           </div>
         </div>
