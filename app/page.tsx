@@ -59,14 +59,14 @@ const handleSubmit = async () => {
 
 
 
-  const handleLogout = async () => {
-    await fetch("/api/logout", {
-      method: "POST",
-      credentials: "include",
-    });
+  // const handleLogout = async () => {
+  //   await fetch("/api/logout", {
+  //     method: "POST",
+  //     credentials: "include",
+  //   });
 
-    window.location.href = "/login";
-  };
+  //   window.location.href = "/login";
+  // };
 
 
   return (
@@ -87,12 +87,12 @@ const handleSubmit = async () => {
             <Link href="/" className="border font-poppins w-64 px-8 py-2 rounded-full text-white bg-primary border-white cursor-pointer hover:bg-ivory hover:text-olivegreen duration-200">
               Jadwalkan Fitting
             </Link>
-            <button
+            {/* <button
               onClick={handleLogout}
               className="border rounded-full px-6 py-2 border-red-600 bg-red-600 hover:bg-red-800 duration-300 text-white"
             >
               Logout
-            </button>
+            </button> */}
           </div>
         </div>
       </section>
