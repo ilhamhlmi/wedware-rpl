@@ -64,7 +64,7 @@ export default function SignUp() {
 
             <button
               onClick={handleSignup}
-              className="border rounded-full mt-2 px-6 py-2 w-2/3 bg-primary text-ivory font-poppins"
+              className="border rounded-full mt-2 px-6 py-2 font-poppins border-primary bg-primary hover:bg-olivegreen hover:border-olivegreen shadow-md hover:shadow-2xl duration-300 text-ivory cursor-pointer w-2/3"
             >
               Create Account
             </button>

@@ -3,20 +3,29 @@
 import Link from "next/link"
 import Image from "next/image"
 import { usePathname } from "next/navigation";
+import { useState, useEffect } from "react";
 
 
 
 export default function AdminNavbar() {
     const pathname = usePathname()
 
-      const handleLogout = async () => {
-    await fetch("/api/admin/logout", {
-      method: "POST",
-      credentials: "include",
-    });
+    const handleLogout = async () => {
+        await fetch("/api/admin/logout", {
+            method: "POST",
+            credentials: "include",
+        });
 
-    window.location.href = "/admin/login";
-  };
+        window.location.href = "/admin/login";
+    };
+
+    const [data, setData] = useState<any>(null);
+
+    useEffect(() => {
+        fetch("/api/totalcount")
+            .then((res) => res.json())
+            .then(setData);
+    }, []);
 
     return (
         <div>
@@ -67,7 +76,7 @@ export default function AdminNavbar() {
                                     <h1 className="font-poppins text-gray-700">Total Pengguna Terdaftar</h1>
                                 </div>
                                 <div>
-                                    <h1 className="font-poppins text-neutral-900 text-3xl">13</h1>
+                                    <h1 className="font-poppins text-neutral-900 text-3xl">{data?.users.total}</h1>
                                 </div>
                             </div>
                             <div className="border p-5 rounded-xl bg-lightolive shadow-md">
@@ -75,7 +84,7 @@ export default function AdminNavbar() {
                                     <h1 className="font-poppins text-gray-700">Peminjaman Menunggu</h1>
                                 </div>
                                 <div>
-                                    <h1 className="font-poppins text-neutral-900 text-3xl">13</h1>
+                                    <h1 className="font-poppins text-neutral-900 text-3xl">{data?.orders.pending}</h1>
                                 </div>
                             </div>
                             <div className="border p-5 rounded-xl bg-lightolive shadow-md">
@@ -83,7 +92,7 @@ export default function AdminNavbar() {
                                     <h1 className="font-poppins text-gray-700">Peminjaman Berlangsung</h1>
                                 </div>
                                 <div>
-                                    <h1 className="font-poppins text-neutral-900 text-3xl">13</h1>
+                                    <h1 className="font-poppins text-neutral-900 text-3xl">{data?.orders.progress}</h1>
                                 </div>
                             </div>
                             <div className="border p-5 rounded-xl bg-lightolive shadow-md">
@@ -91,7 +100,7 @@ export default function AdminNavbar() {
                                     <h1 className="font-poppins text-gray-700">Peminjaman Selesai</h1>
                                 </div>
                                 <div>
-                                    <h1 className="font-poppins text-neutral-900 text-3xl">13</h1>
+                                    <h1 className="font-poppins text-neutral-900 text-3xl">{data?.orders.done}</h1>
                                 </div>
                             </div>
                         </div>
