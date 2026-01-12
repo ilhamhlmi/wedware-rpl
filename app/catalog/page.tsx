@@ -52,7 +52,7 @@ export default function Catalog() {
                                     onClick={() =>
                                         addToCart({
                                             id: "dress-2",
-                                            name: "Wedding Dress 2 - Rp.300.000",
+                                            name: "Wedding Dress 2",
                                             image: dress2.src,
                                         })
                                     }

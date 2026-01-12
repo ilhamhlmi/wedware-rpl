@@ -13,8 +13,51 @@ import quality from "@/public/hero/quality-5-svgrepo-com (1).svg"
 import process from "@/public/hero/process-svgrepo-com (1).svg"
 import service from "@/public/hero/service-svgrepo-com.svg"
 import FooterClient from "./components/FooterClient";
+import { useEffect } from "react";
+import { useState } from "react";
+import { useRef } from "react";
 
-export default function Home() {
+
+
+  
+export default function Home () {
+const nameRef = useRef<HTMLInputElement>(null);
+const messageRef = useRef<HTMLTextAreaElement>(null);
+
+
+  const [name, setName] = useState("");
+  const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false);
+
+const handleSubmit = async () => {
+  const name = nameRef.current?.value;
+  const message = messageRef.current?.value;
+
+  if (!name || !message) {
+    alert("Nama dan ulasan wajib diisi");
+    return;
+  }
+
+  setLoading(true);
+
+  const res = await fetch("/api/reviews", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ name, message }),
+  });
+
+  if (res.ok) {
+    nameRef.current!.value = "";
+    messageRef.current!.value = "";
+    alert("Ulasan berhasil dikirim");
+  } else {
+    alert("Gagal mengirim ulasan");
+  }
+
+  setLoading(false);
+};
+
+
 
   const handleLogout = async () => {
     await fetch("/api/logout", {
@@ -296,9 +339,10 @@ export default function Home() {
             </div>
 
             <div className="w-full xl:w-1/2 text-center xl:text-start border flex flex-col p-4 space-y-5 rounded-xl bg-lightolive border-olivegreen shadow-xl">
-              <input type="text" placeholder="Nama" className="border px-4 py-3 rounded-xl font-poppins bg-ivory border-ivory focus:outline-none" />
-              <textarea placeholder="Ulasan Anda" className="border px-4 py-3 rounded-xl font-poppins bg-ivory border-ivory focus:outline-none" />
-              <button className="border rounded-xl font-poppins py-2 text-white bg-olivegreen border-olivegreen font-semibold hover:bg-olivegreen-hover hover:border-olivegreen-hover duration-200 hover:shadow-2xl shadow-md cursor-pointer">Kirim</button>
+              <input ref={nameRef} type="text" placeholder="Nama" className="border px-4 py-3 rounded-xl font-poppins bg-ivory border-ivory focus:outline-none"/>
+              <textarea ref={messageRef} placeholder="Ulasan Anda" className="border px-4 py-3 rounded-xl font-poppins bg-ivory border-ivory focus:outline-none"/>
+                <button onClick= {handleSubmit} disabled={loading} className="border rounded-xl font-poppins py-2 text-white bg-olivegreen border-olivegreen font-semibold hover:bg-olivegreen-hover hover:border-olivegreen-hover duration-200 hover:shadow-2xl shadow-md cursor-pointer"> {loading ? "Mengirim..." : "Kirim"}
+             </button>
             </div>
           </div>
         </div>

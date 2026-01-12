@@ -17,9 +17,20 @@ interface Order {
 }
 
 export default function Dashboard() {
+
+  const formatDate = (dateString: string) => {
+  if (!dateString) return "-"
+  return new Date(dateString).toLocaleDateString("id-ID", {
+    day: "2-digit",
+    month: "long",
+    year: "numeric",
+  })
+}
+
   const [orders, setOrders] = useState<Order[]>([])
 
   const updateStatus = async (order: Order) => {
+    
     let newStatus: Order["status"]
 
     if (order.status === "pending") newStatus = "in_progress"
@@ -80,11 +91,11 @@ export default function Dashboard() {
                 <h1>ID User: {order.user_id}</h1>
                 <h1>Nama: {order.nama}</h1>
                 <h1>Alamat: {order.address}</h1>
-                <h1>Tgl Fitting: {order.fitting_date}</h1>
+                <h1>Tgl Fitting: {formatDate(order.fitting_date)}</h1>
                 <h1>Waktu Fitting: {order.fitting_time}</h1>
-                <h1>Tgl Acara: {order.wedding_date}</h1>
+                <h1>Tgl Acara: {formatDate(order.wedding_date)}</h1>
                 <h1>Waktu Acara: {order.wedding_time}</h1>
-                <h1>Tgl Pengembalian: {order.return_date}</h1>
+                <h1>Tgl Pengembalian: {formatDate(order.return_date)}</h1>
                 <button
                   onClick={() => updateStatus(order)}
                   disabled={order.status === "done"}
