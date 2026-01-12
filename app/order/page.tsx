@@ -56,12 +56,21 @@ export default function Order() {
 
 
   return (
-    <section className="min-h-screen w-full flex items-center px-6 pt-32 pb-16">
+    <section className="min-h-screen w-full flex flex-col items-center px-6 pt-32 pb-16">
       <NavbarClient />
+
+      <div className="container mx-auto bg-lightolive rounded-xl p-6 xl:max-w-2/3 mb-5">
+        <h1 className="font-poppins text-ivory text-center text-lg mb-3 font-semibold">Ketentuan Pembayaran Sewa & Pengantaran</h1>
+        <div className="text-justify space-y-2">
+          <h1 className="font-poppins text-ivory text-">- Pembayaran biaya sewa dan ongkos pengantaran dilakukan setelah proses fitting selesai</h1>
+          <h1 className="font-poppins text-ivory text-">- Apabila pelanggan memutuskan untuk <span className="font-semibold">membatalkan</span> maka biaya ongkos fitting dan pengantaran tetap <span className="font-semibold">wajib dibayarkan</span>.</h1>
+          <h1 className="font-poppins text-ivory text-">- Biaya ongkos mencakup proses kunjungan fitting, pengantaran, dan operasional layanan.</h1>
+        </div>
+      </div>
 
       <div className="container mx-auto bg-olivegreen rounded-xl p-6 xl:max-w-2/3">
         <h1 className="font-edu text-ivory text-5xl text-center mb-10">
-          Your Order
+          Pesanan Kamu
         </h1>
 
         <div className="space-y-2">
@@ -150,11 +159,24 @@ export default function Order() {
           </div>
 
           {/* SUBMIT */}
-            <button className="w-full border  text-center font-poppins text-white text-lg rounded-xl bg-green-500 border-green-500 cursor-pointer hover:border-green-700 hover:bg-green-700 duration-200 hover:shadow-xl py-1" onClick={handleSubmit}>Submit</button>
+          <button className="w-full border  text-center font-poppins text-white text-lg rounded-xl bg-green-500 border-green-500 cursor-pointer hover:border-green-700 hover:bg-green-700 duration-200 hover:shadow-xl py-1" onClick={handleSubmit}>Sewa Sekarang</button>
         </div>
 
       </div>
+
+      <div className="container mx-auto bg-lightolive rounded-xl p-6 xl:max-w-2/3 mt-5">
+        <h1 className="font-poppins text-ivory text-center text-lg mb-3 font-semibold">Informasi Biaya Pengantaran</h1>
+        <div className="text-center space-y-2">
+          <h1 className="font-poppins text-ivory text-">0 - 5 km : Rp. 50.000 -</h1>
+          <h1 className="font-poppins text-ivory text-">6 - 10 km : Rp. 75.000 -</h1>
+          <h1 className="font-poppins text-ivory text-">11 - 15 km : Rp. 100.000 -</h1>
+          <h1 className="font-poppins text-ivory text-">16 - 20 km : Rp. 150.000 -</h1>
+          <h1 className="font-poppins text-ivory text-">Lebih dari 20 km : Menyesuaikan</h1>
+        </div>
+      </div>
     </section>
+
+
   );
 }
 

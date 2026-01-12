@@ -32,7 +32,7 @@ export default function AdminNavbar() {
                             <Link href="/admin/ulasan" className={pathname === '/admin/ulasan' ? 'font-poppins font-semibold text-white uppercase' : 'font-poppins text-black hover:text-white uppercase'}>
                                 ULASAN
                             </Link>
-                            <Link href="/contact" className={pathname === '/' ? 'font-poppins font-semibold text-white uppercase' : 'font-poppins text-black hover:text-white uppercase'}>
+                            <Link href="/admin/laporanworker" className={pathname === '/admin/laporanworker' ? 'font-poppins font-semibold text-white uppercase' : 'font-poppins text-black hover:text-white uppercase'}>
                                 LAPORAN WORKER
                             </Link>
                         </div>

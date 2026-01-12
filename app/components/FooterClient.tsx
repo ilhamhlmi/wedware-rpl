@@ -17,11 +17,10 @@ export default function FooterClient() {
                     {/* LEFT — BRAND */}
                     <div className="lg:w-1/2">
                         <h1 className="font-poppins font-semibold text-xl mb-4">
-                            LapCare Indonesia
+                            WedWare Indonesia
                         </h1>
                         <p className="font-poppins text-sm text-white/80 mb-6 max-w-md">
-                            Lapcare adalah platform panduan serta layanan konsultasi & Home
-                            Service untuk membantu permasalahan Laptop & PC.
+                            WedWare adalah platform penyediaan busana hingga aksesori wanita & pria untuk acara pernikahan.
                         </p>
 
                         <div className="space-y-3 text-sm text-white/70">
