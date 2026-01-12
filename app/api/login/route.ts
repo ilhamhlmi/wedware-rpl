@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import pool from "@/lib/db";
+import {db} from "@/lib/db";
 
 export async function POST(req: Request) {
   try {
@@ -12,7 +12,7 @@ export async function POST(req: Request) {
       );
     }
 
-    const [rows] = await pool.query(
+    const [rows] = await db.query(
       "SELECT id, username, email, password FROM users WHERE username = ? AND role = 'user'",
       [username]
     );

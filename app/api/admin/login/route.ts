@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import pool from "@/lib/db";
+import { db } from "@/lib/db";
 
 export async function POST(req: Request) {
   try {
@@ -12,8 +12,8 @@ export async function POST(req: Request) {
       );
     }
 
-    const [rows] = await pool.query(
-      "SELECT id, username, email, password FROM users WHERE username = ? AND role = 'admin'",
+    const [rows] = await db.query(
+      "SELECT id, password FROM users WHERE username = ? AND role = 'admin'",
       [username]
     );
 
@@ -27,18 +27,25 @@ export async function POST(req: Request) {
     }
 
     const response = NextResponse.json(
-      { message: "Login berhasil" },
+      { message: "Login admin berhasil" },
       { status: 200 }
     );
 
+    //  HAPUS COOKIE WORKER JIKA ADA
+    response.cookies.delete("worker_id");
+    response.cookies.delete("worker_role");
+
+    // SET COOKIE ADMIN
     response.cookies.set("admin_id", String(admin.id), {
       httpOnly: true,
-      path: "/admin",
+      path: "/",
+      sameSite: "lax",
     });
 
     response.cookies.set("admin_role", "admin", {
       httpOnly: true,
-      path: "/admin",
+      path: "/",
+      sameSite: "lax",
     });
 
     return response;

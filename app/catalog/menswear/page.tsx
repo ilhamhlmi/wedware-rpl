@@ -30,7 +30,7 @@ export default function MensWear() {
                                     onClick={() =>
                                         addToCart({
                                             id: "dress-1",
-                                            name: "Suit 1",
+                                            name: "Suit 1 - Rp.300.000",
                                             image: men1.src,
                                         })}
                                     className="font-poppins  border rounded-full px-2 text-white border-olivegreen bg-olivegreen font-semibold text-lg cursor-pointer">+</button>
@@ -50,7 +50,7 @@ export default function MensWear() {
                                     onClick={() =>
                                         addToCart({
                                             id: "dress-2",
-                                            name: "Suit 2",
+                                            name: "Suit 2 - Rp.300.000",
                                             image: men2.src,
                                         })
                                     }
@@ -71,7 +71,7 @@ export default function MensWear() {
                                     onClick={() =>
                                         addToCart({
                                             id: "dress-3",
-                                            name: "Suit 3",
+                                            name: "Suit 3 - Rp.300.000",
                                             image: men3.src,
                                         })
                                     }
@@ -92,7 +92,7 @@ export default function MensWear() {
                                     onClick={() =>
                                         addToCart({
                                             id: "dress-4",
-                                            name: "Suit 4",
+                                            name: "Suit 4 - Rp.300.000",
                                             image: men4.src,
                                         })
                                     }

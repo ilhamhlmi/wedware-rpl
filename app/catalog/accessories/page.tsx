@@ -49,7 +49,7 @@ export default function Accessories() {
                                     onClick={() =>
                                         addToCart({
                                             id: "dress-2",
-                                            name: "Accessories 2",
+                                            name: "Accessories 2 - Rp.300.000",
                                             image: acc2.src,
                                         })
                                     }
@@ -67,7 +67,7 @@ export default function Accessories() {
                                     onClick={() =>
                                         addToCart({
                                             id: "dress-3",
-                                            name: "Accessories 3",
+                                            name: "Accessories 3 - Rp.300.000",
                                             image: acc3.src,
                                         })
                                     }
@@ -85,7 +85,7 @@ export default function Accessories() {
                                     onClick={() =>
                                         addToCart({
                                             id: "dress-4",
-                                            name: "Accessories 4",
+                                            name: "Accessories 4 - Rp.300.000",
                                             image: dummy.src,
                                         })
                                     }

@@ -30,7 +30,7 @@ export default function WomensWear() {
                                     onClick={() =>
                                         addToCart({
                                             id: "dress-1",
-                                            name: "Women Dress 1",
+                                            name: "Women Dress 1 - Rp.300.000",
                                             image: women1.src,
                                         })
                                     }
@@ -51,7 +51,7 @@ export default function WomensWear() {
                                     onClick={() =>
                                         addToCart({
                                             id: "dress-2",
-                                            name: "Women Dress 2",
+                                            name: "Women Dress 2 - Rp.300.000",
                                             image: women2.src,
                                         })
                                     }
@@ -72,7 +72,7 @@ export default function WomensWear() {
                                     onClick={() =>
                                         addToCart({
                                             id: "dress-3",
-                                            name: "Women Dress 3",
+                                            name: "Women Dress 3 - Rp.300.000",
                                             image: women3.src,
                                         })
                                     }
@@ -93,7 +93,7 @@ export default function WomensWear() {
                                     onClick={() =>
                                         addToCart({
                                             id: "dress-4",
-                                            name: "Women Dress 4",
+                                            name: "Women Dress 4 - Rp.300.000",
                                             image: women4.src,
                                         })
                                     }

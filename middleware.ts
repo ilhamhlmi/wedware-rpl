@@ -4,32 +4,21 @@ import type { NextRequest } from "next/server";
 export function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
 
-  // USER COOKIE
-  const userId = request.cookies.get("user_id_user")?.value;
-  const userRole = request.cookies.get("user_role_user")?.value;
+  // === COOKIE ===
+  const adminId = request.cookies.get("admin_id")?.value;
+  const adminRole = request.cookies.get("admin_role")?.value;
 
-  // ADMIN COOKIE
-  const adminId = request.cookies.get("user_id_admin")?.value;
-  const adminRole = request.cookies.get("user_role_admin")?.value;
+  const workerId = request.cookies.get("worker_id")?.value;
+  const workerRole = request.cookies.get("worker_role")?.value;
 
-  // WORKER COOKIE
-  const workerId = request.cookies.get("user_id_worker")?.value;
-  const workerRole = request.cookies.get("user_role_worker")?.value;
-
-  /* LOGIN PAGE GUARD */
-
-  // USER LOGIN
-  if (pathname === "/login") {
-    if (userId && userRole === "user") {
-      return NextResponse.redirect(new URL("/", request.url));
-    }
-    return NextResponse.next();
-  }
+  // === LOGIN PAGE GUARD ===
 
   // ADMIN LOGIN
   if (pathname === "/admin/login") {
     if (adminId && adminRole === "admin") {
-      return NextResponse.redirect(new URL("/admin", request.url));
+      return NextResponse.redirect(
+        new URL("/admin/dashboard", request.url)
+      );
     }
     return NextResponse.next();
   }
@@ -44,25 +33,26 @@ export function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
-  /* USER AREA */
-  if (pathname.startsWith("/user")) {
-    if (!userId || userRole !== "user") {
-      return NextResponse.redirect(new URL("/login", request.url));
-    }
-  }
+  // === PROTECTED AREA ===
 
-  /* ADMIN AREA */
-  if (pathname.startsWith("/admin")) {
+  // ADMIN AREA
+  if (pathname.startsWith("/admin") && pathname !== "/admin/login") {
     if (!adminId || adminRole !== "admin") {
-      return NextResponse.redirect(new URL("/admin/login", request.url));
+      return NextResponse.redirect(
+        new URL("/admin/login", request.url)
+      );
     }
+    return NextResponse.next();
   }
 
-  /* WORKER AREA */
-  if (pathname.startsWith("/worker")) {
+  // WORKER AREA
+  if (pathname.startsWith("/worker") && pathname !== "/worker/login") {
     if (!workerId || workerRole !== "worker") {
-      return NextResponse.redirect(new URL("/worker/login", request.url));
+      return NextResponse.redirect(
+        new URL("/worker/login", request.url)
+      );
     }
+    return NextResponse.next();
   }
 
   return NextResponse.next();
@@ -70,8 +60,6 @@ export function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    "/login",
-    "/user/:path*",
     "/admin/login",
     "/admin/:path*",
     "/worker/login",
