@@ -4,8 +4,20 @@ import Link from "next/link"
 import Image from "next/image"
 import { usePathname } from "next/navigation";
 
+
+
 export default function AdminNavbar() {
     const pathname = usePathname()
+
+      const handleLogout = async () => {
+    await fetch("/api/admin/logout", {
+      method: "POST",
+      credentials: "include",
+    });
+
+    window.location.href = "/admin/login";
+  };
+
     return (
         <div>
             <section className="flex justify-center px-4 mt-5">
@@ -36,7 +48,7 @@ export default function AdminNavbar() {
 
                         {/* RIGHT */}
                         <div className="ml-auto px-4">
-                            <button className="border px-3 py-1 rounded-xl border-red-500 bg-red-500 hover:bg-red-700 hover:border-red-700 duration-200 text-white font-poppins cursor-pointer hover:shadow-md">
+                            <button onClick={handleLogout} className="border px-3 py-1 rounded-xl border-red-500 bg-red-500 hover:bg-red-700 hover:border-red-700 duration-200 text-white font-poppins cursor-pointer hover:shadow-md">
                                 Logout
                             </button>
                         </div>

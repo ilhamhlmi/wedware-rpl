@@ -1,9 +1,23 @@
-"use client"
+"use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
 
-export default function AddProductPage() {
+export default function EditProductPage() {
+  const params = useParams();
+  const router = useRouter();
+
+  // Pastikan id adalah string tunggal
+  const idParam = Array.isArray(params?.id) ? params.id[0] : params?.id;
+  const productId = idParam ? parseInt(idParam) : NaN;
+
+  if (isNaN(productId)) {
+    alert("ID produk tidak valid");
+    router.push("/admin/produk");
+    return null;
+  }
+
   const [file, setFile] = useState<File | null>(null);
   const [name, setName] = useState("");
   const [category, setCategory] = useState("");
@@ -11,6 +25,37 @@ export default function AddProductPage() {
   const [stock, setStock] = useState("");
   const [price, setPrice] = useState("");
   const [loading, setLoading] = useState(false);
+  const [imageUrl, setImageUrl] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchProduct = async () => {
+      try {
+        const res = await fetch("/api/products");
+        if (!res.ok) throw new Error("Gagal mengambil produk");
+
+        const data = await res.json();
+        const product = data.products.find((p: any) => p.id === productId);
+        if (!product) {
+          alert("Produk tidak ditemukan");
+          router.push("/admin/produk");
+          return;
+        }
+
+        setName(product.name);
+        setCategory(product.category);
+        setSize(product.size || "");
+        setStock(product.stock.toString());
+        setPrice(product.price.toString());
+        setImageUrl(product.image_url || null);
+      } catch (err) {
+        console.error(err);
+        alert("Terjadi kesalahan saat mengambil data produk");
+        router.push("/admin/produk");
+      }
+    };
+
+    fetchProduct();
+  }, [productId, router]);
 
   const handleSubmit = async () => {
     if (!name || !category || !stock || !price) {
@@ -21,35 +66,26 @@ export default function AddProductPage() {
     setLoading(true);
 
     try {
-      const formData = new FormData();
-      formData.append("name", name);
-      formData.append("category", category);
-      formData.append("size", size);
-      formData.append("stock", stock);
-      formData.append("price", price);
-      if (file) formData.append("image", file);
-
       const res = await fetch("/api/products", {
-        method: "POST",
-        body: formData
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          id: productId,
+          name,
+          category,
+          size,
+          stock: parseInt(stock),
+          price: parseFloat(price),
+        }),
       });
 
       const data = await res.json();
       alert(data.message);
 
-      if (res.ok) {
-        // reset form
-        setName("");
-        setCategory("");
-        setSize("");
-        setStock("");
-        setPrice("");
-        setFile(null);
-      }
-
+      if (res.ok) router.push("/admin/produk");
     } catch (error) {
       console.error(error);
-      alert("Terjadi kesalahan");
+      alert("Terjadi kesalahan saat update produk");
     }
 
     setLoading(false);
@@ -59,9 +95,11 @@ export default function AddProductPage() {
     <section className="min-h-screen w-full flex items-center px-6 pt-16 pb-16">
       <div className="container mx-auto bg-olivegreen flex items-center justify-center rounded-xl p-6">
         <div className="flex flex-col w-full xl:w-1/2">
-          <h1 className="text-5xl text-center text-ivory font-poppins font-semibold mb-10">Tambah Produk</h1>
+          <h1 className="text-5xl text-center text-ivory font-poppins font-semibold mb-10">
+            Edit Produk
+          </h1>
 
-          {/* Upload File */}
+          {/* Preview / Upload Foto */}
           <div className="w-full flex items-center justify-center mb-3">
             <label
               htmlFor="uploadFoto"
@@ -71,7 +109,11 @@ export default function AddProductPage() {
                 <span>📤</span>
                 <h1>Upload Foto Produk</h1>
                 <p className="text-ivory font-poppins text-sm -mt-2.5 mb-3 text-center">
-                  {file ? `File dipilih: ${file.name}` : "Belum ada file dipilih"}
+                  {file
+                    ? `File dipilih: ${file.name}`
+                    : imageUrl
+                    ? "Foto saat ini"
+                    : "Belum ada file dipilih"}
                 </p>
               </span>
             </label>
@@ -86,32 +128,32 @@ export default function AddProductPage() {
 
           {/* Input Fields */}
           <div className="flex flex-col space-y-2">
-            <input 
+            <input
               placeholder="Nama Barang"
               value={name}
               onChange={(e) => setName(e.target.value)}
               className="border flex justify-between items-center p-3 rounded-xl bg-lightolive border-lightolive w-full text-white font-poppins focus:outline-none"
             />
-            <input 
+            <input
               placeholder="Kategori"
               value={category}
               onChange={(e) => setCategory(e.target.value)}
               className="border flex justify-between items-center p-3 rounded-xl bg-lightolive border-lightolive w-full text-white font-poppins focus:outline-none"
             />
-            <input 
+            <input
               placeholder="Ukuran ( S - XXL) (opsional)"
               value={size}
               onChange={(e) => setSize(e.target.value)}
               className="border flex justify-between items-center p-3 rounded-xl bg-lightolive border-lightolive w-full text-white font-poppins focus:outline-none"
             />
-            <input 
+            <input
               placeholder="Stok"
               type="number"
               value={stock}
               onChange={(e) => setStock(e.target.value)}
               className="border flex justify-between items-center p-3 rounded-xl bg-lightolive border-lightolive w-full text-white font-poppins focus:outline-none"
             />
-            <input 
+            <input
               placeholder="Harga Sewa Mulai Dari / Hari"
               type="number"
               value={price}
@@ -121,15 +163,17 @@ export default function AddProductPage() {
           </div>
 
           {/* Buttons */}
-          <button 
+          <button
             onClick={handleSubmit}
             disabled={loading}
-            className={`w-full border mt-2 text-center font-poppins text-white text-lg rounded-xl bg-green-500 border-green-500 cursor-pointer hover:border-green-700 hover:bg-green-700 duration-200 hover:shadow-xl py-1 font-semibold ${loading ? "opacity-50 cursor-not-allowed" : ""}`}
+            className={`w-full border mt-2 text-center font-poppins text-white text-lg rounded-xl bg-green-500 border-green-500 cursor-pointer hover:border-green-700 hover:bg-green-700 duration-200 hover:shadow-xl py-1 font-semibold ${
+              loading ? "opacity-50 cursor-not-allowed" : ""
+            }`}
           >
-            {loading ? "Menyimpan..." : "Tambah"}
+            {loading ? "Menyimpan..." : "Update"}
           </button>
 
-          <Link 
+          <Link
             href="/admin/produk"
             className="w-full border text-center font-poppins text-white text-lg rounded-xl bg-dustypink border-dustypink cursor-pointer hover:border-lightolive hover:bg-lightolive duration-200 hover:shadow-xl py-1 mt-2"
           >
@@ -138,5 +182,5 @@ export default function AddProductPage() {
         </div>
       </div>
     </section>
-  )
+  );
 }

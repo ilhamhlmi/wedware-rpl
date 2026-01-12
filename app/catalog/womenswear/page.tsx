@@ -24,17 +24,14 @@ export default function WomensWear() {
                     <div className="grid grid-cols-1 xl:grid-cols-4 gap-y-5 xl:gap-y-0 px-6 justify-items-center">
                         <div className="border border-olivegreen flex flex-col justify-center items-center rounded-xl w-65">
                             <Image src={women1} alt="dummy" className="w-65 rounded-xl" />
-                            <div className="flex w-full items-center justify-between px-4 mt-3">
-                                <h1 className="font-poppins">Busana Wanita 1</h1>
-                                <button className="font-poppins  border rounded-full px-2 text-white border-olivegreen bg-olivegreen font-semibold text-lg cursor-pointer">+</button>
-                            </div>
-                            <div className="flex w-full items-center justify-between px-4">
-                                <h1 className="font-poppins mt-3 mb-3">Women Dress 1</h1>
+                                    <h1 className="font-poppins mt-3 mb-3">Busana Wanita 1</h1>
+                                <h1 className="font-poppins mt-3 mb-3">Rp.300.000</h1>
+                                <div className="flex w-full items-center justify-between px-4">
                                 <button
                                     onClick={() =>
                                         addToCart({
                                             id: "dress-1",
-                                            name: "Women Dress 1",
+                                            name: "Women Dress 1 - Rp.300.000",
                                             image: women1.src,
                                         })
                                     }
@@ -45,17 +42,14 @@ export default function WomensWear() {
                         </div>
                         <div className="border border-olivegreen flex flex-col justify-center items-center rounded-xl w-65">
                             <Image src={women2} alt="dummy" className="w-65 rounded-xl" />
-                            <div className="flex w-full items-center justify-between px-4 mt-3">
-                                <h1 className="font-poppins">Busana Wanita 2</h1>
-                                <button className="font-poppins  border rounded-full px-2 text-white border-olivegreen bg-olivegreen font-semibold text-lg cursor-pointer">+</button>
-                            </div>
-                            <div className="flex w-full items-center justify-between px-4">
-                                <h1 className="font-poppins mt-3 mb-3">Women Dress 2</h1>
+                                <h1 className="font-poppins mt-3 mb-3">Busana Wanita 2</h1>
+                                <h1 className="font-poppins mt-3 mb-3">Rp.300.000</h1>
+                                <div className="flex w-full items-center justify-between px-4">
                                 <button
                                     onClick={() =>
                                         addToCart({
                                             id: "dress-2",
-                                            name: "Women Dress 2",
+                                            name: "Women Dress 2 - Rp.300.000",
                                             image: women2.src,
                                         })
                                     }
@@ -66,17 +60,14 @@ export default function WomensWear() {
                         </div>
                         <div className="border border-olivegreen flex flex-col justify-center items-center rounded-xl w-65">
                             <Image src={women3} alt="dummy" className="w-65 rounded-xl" />
-                            <div className="flex w-full items-center justify-between px-4 mt-3">
-                                <h1 className="font-poppins">Busana Wanita 3</h1>
-                                <button className="font-poppins  border rounded-full px-2 text-white border-olivegreen bg-olivegreen font-semibold text-lg cursor-pointer">+</button>
-                            </div>
-                            <div className="flex w-full items-center justify-between px-4">
-                                <h1 className="font-poppins mt-3 mb-3">Women Dress 3</h1>
+                                <h1 className="font-poppins mt-3 mb-3">Busana Wanita 3</h1>
+                                <h1 className="font-poppins mt-3 mb-3">Rp.300.000</h1>
+                                <div className="flex w-full items-center justify-between px-4">
                                 <button
                                     onClick={() =>
                                         addToCart({
                                             id: "dress-3",
-                                            name: "Women Dress 3",
+                                            name: "Women Dress 3 - Rp.300.000",
                                             image: women3.src,
                                         })
                                     }
@@ -87,17 +78,15 @@ export default function WomensWear() {
                         </div>
                         <div className="border border-olivegreen flex flex-col justify-center items-center rounded-xl w-65">
                             <Image src={women4} alt="dummy" className="w-65 rounded-xl" />
-                            <div className="flex w-full items-center justify-between px-4 mt-3">
-                                <h1 className="font-poppins">Busana Wanita 4</h1>
-                                <button className="font-poppins  border rounded-full px-2 text-white border-olivegreen bg-olivegreen font-semibold text-lg cursor-pointer">+</button>
-                            </div>
-                            <div className="flex w-full items-center justify-between px-4">
-                                <h1 className="font-poppins mt-3 mb-3">Women Dress 4</h1>
+   
+                                <h1 className="font-poppins mt-3 mb-3">Busana Wanita 4</h1>
+                                <h1 className="font-poppins mt-3 mb-3">Rp.300.000</h1>
+                                <div className="flex w-full items-center justify-between px-4">
                                 <button
                                     onClick={() =>
                                         addToCart({
                                             id: "dress-4",
-                                            name: "Women Dress 4",
+                                            name: "Women Dress 4 - Rp.300.000",
                                             image: women4.src,
                                         })
                                     }

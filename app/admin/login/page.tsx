@@ -18,10 +18,11 @@ export default function AdminLogin() {
     setLoading(true);
 
     const res = await fetch("/api/admin/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ username, password }),
-    });
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  credentials: "include",
+  body: JSON.stringify({ username, password }),
+});
 
     const data = await res.json();
     setLoading(false);

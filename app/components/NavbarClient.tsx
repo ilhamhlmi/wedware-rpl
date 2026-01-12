@@ -106,7 +106,7 @@ export default function NavbarClient() {
                                 <div className="space-x-8 flex items-center justify-enter">
                                     <Link href="/" className={pathname === '/' ? 'font-poppins font-semibold text-olivegreen uppercase' : 'font-poppins text-black hover:text-olivegreen uppercase'}>Beranda</Link>
                                     <Link href="/about" className="font-poppins text-black hover:text-olivegreen uppercase">Tentang kami</Link>
-                                    {/* <Link href="/catalog" className={pathname.startsWith('/catalog') ? 'font-poppins font-semibold text-olivegreen uppercase' : 'font-poppins text-black hover:text-olivegreen uppercase'}>Katalog</Link> */}
+                                    <Link href="/catalog" className={pathname.startsWith('/catalog') ? 'font-poppins font-semibold text-olivegreen uppercase' : 'font-poppins text-black hover:text-olivegreen uppercase'}>Katalog</Link>
                                     <Link href="/contact" className="font-poppins text-black hover:text-olivegreen uppercase">Kontak</Link>
                                     <Link href="/login" className="font-poppins uppercase border px-2 py-1 rounded-xl border-olivegreen text-olivegreen hover:bg-olivegreen hover:text-white duration-200">
                                         Sign In
