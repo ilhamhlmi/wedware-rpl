@@ -29,8 +29,8 @@ export default function WomensWear() {
                                 <button
                                     onClick={() =>
                                         addToCart({
-                                            id: "dress-1",
-                                            name: "Women Dress 1 - Rp.300.000",
+                                            id: "women-1",
+                                            name: "Busana Wanita 1",
                                             image: women1.src,
                                         })
                                     }
@@ -50,8 +50,8 @@ export default function WomensWear() {
                                 <button
                                     onClick={() =>
                                         addToCart({
-                                            id: "dress-2",
-                                            name: "Women Dress 2 - Rp.300.000",
+                                            id: "women-2",
+                                            name: "Busana Wanita 2",
                                             image: women2.src,
                                         })
                                     }
@@ -71,8 +71,8 @@ export default function WomensWear() {
                                 <button
                                     onClick={() =>
                                         addToCart({
-                                            id: "dress-3",
-                                            name: "Women Dress 3 - Rp.300.000",
+                                            id: "women-3",
+                                            name: "Busana Wanita 3",
                                             image: women3.src,
                                         })
                                     }
@@ -92,8 +92,8 @@ export default function WomensWear() {
                                 <button
                                     onClick={() =>
                                         addToCart({
-                                            id: "dress-4",
-                                            name: "Women Dress 4 - Rp.300.000",
+                                            id: "women-4",
+                                            name: "Busana Wanita 4",
                                             image: women4.src,
                                         })
                                     }

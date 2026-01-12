@@ -13,7 +13,7 @@ import { addToCart } from "@/utils/cart";
 import FooterClient from "@/app/components/FooterClient";
 
 
-export default function Accessories() {
+export default function Aksesori() {
     const pathname = usePathname()
     return (
         <div>
@@ -30,8 +30,8 @@ export default function Accessories() {
                                 <button
                                     onClick={() =>
                                         addToCart({
-                                            id: "dress-1",
-                                            name: "Accessories 1",
+                                            id: "acc-1",
+                                            name: "Aksesori 1",
                                             image: acc1.src,
                                         })
                                     }
@@ -48,8 +48,8 @@ export default function Accessories() {
                                 <button
                                     onClick={() =>
                                         addToCart({
-                                            id: "dress-2",
-                                            name: "Accessories 2 - Rp.300.000",
+                                            id: "acc-2",
+                                            name: "Aksesori 2",
                                             image: acc2.src,
                                         })
                                     }
@@ -66,8 +66,8 @@ export default function Accessories() {
                                 <button
                                     onClick={() =>
                                         addToCart({
-                                            id: "dress-3",
-                                            name: "Accessories 3 - Rp.300.000",
+                                            id: "acc-3",
+                                            name: "Aksesori 3",
                                             image: acc3.src,
                                         })
                                     }
@@ -84,8 +84,8 @@ export default function Accessories() {
                                 <button
                                     onClick={() =>
                                         addToCart({
-                                            id: "dress-4",
-                                            name: "Accessories 4 - Rp.300.000",
+                                            id: "acc-4",
+                                            name: "Aksesori 4",
                                             image: dummy.src,
                                         })
                                     }

@@ -29,8 +29,8 @@ export default function MensWear() {
                                 <button
                                     onClick={() =>
                                         addToCart({
-                                            id: "dress-1",
-                                            name: "Suit 1 - Rp.300.000",
+                                            id: "men-1",
+                                            name: "Busana Pria 1",
                                             image: men1.src,
                                         })}
                                     className="font-poppins  border rounded-full px-2 text-white border-olivegreen bg-olivegreen font-semibold text-lg cursor-pointer">+</button>
@@ -49,8 +49,8 @@ export default function MensWear() {
                                 <button
                                     onClick={() =>
                                         addToCart({
-                                            id: "dress-2",
-                                            name: "Suit 2 - Rp.300.000",
+                                            id: "men-2",
+                                            name: "Busana Pria 2",
                                             image: men2.src,
                                         })
                                     }
@@ -70,8 +70,8 @@ export default function MensWear() {
                                 <button
                                     onClick={() =>
                                         addToCart({
-                                            id: "dress-3",
-                                            name: "Suit 3 - Rp.300.000",
+                                            id: "men-3",
+                                            name: "Busana Pria 3",
                                             image: men3.src,
                                         })
                                     }
@@ -91,8 +91,8 @@ export default function MensWear() {
                                 <button
                                     onClick={() =>
                                         addToCart({
-                                            id: "dress-4",
-                                            name: "Suit 4 - Rp.300.000",
+                                            id: "men-4",
+                                            name: "Busana Pria 4",
                                             image: men4.src,
                                         })
                                     }

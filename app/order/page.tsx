@@ -88,7 +88,7 @@ export default function Order() {
                   removeFromCart(item.id);
                   setCart(getCart());
                 }}
-                className="bg-red-500 text-white px-2 rounded-full"
+                className="bg-red-500 text-white px-2 rounded-full cursor-pointer hover:bg-red-700 duration-200"
               >
                 X
               </button>
