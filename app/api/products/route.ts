@@ -44,7 +44,7 @@ export async function POST(req: Request) {
 
     let imageUrl: string;
     if (uploadedFile) {
-      if (process.env.SUPABASE_URL && process.env.SUPABASE_KEY) {
+      if (process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
         try {
           const filePath = `products/${Date.now()}_${uploadedFile.name}`;
           const { error } = await supabase.storage
