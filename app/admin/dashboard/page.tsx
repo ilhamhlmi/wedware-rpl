@@ -3,6 +3,10 @@
 import { useEffect, useState } from "react"
 import AdminNavbar from "@/app/components/AdminNavbar"
 
+interface OrderItem {
+  product_name: string
+}
+
 interface Order {
   id: number
   user_id: number
@@ -13,40 +17,35 @@ interface Order {
   wedding_date: string
   wedding_time: string
   return_date: string
-  status: "pending" | "in_progress" | "done"
+  status: "pending" | "progress" | "done"
+  items: OrderItem[]
 }
 
 export default function Dashboard() {
-
   const formatDate = (dateString: string) => {
-  if (!dateString) return "-"
-  return new Date(dateString).toLocaleDateString("id-ID", {
-    day: "2-digit",
-    month: "long",
-    year: "numeric",
-  })
-}
+    if (!dateString) return "-"
+    return new Date(dateString).toLocaleDateString("id-ID", {
+      day: "2-digit",
+      month: "long",
+      year: "numeric",
+    })
+  }
 
   const [orders, setOrders] = useState<Order[]>([])
 
-  const updateStatus = async (order: Order) => {
-    
-    let newStatus: Order["status"]
-
-    if (order.status === "pending") newStatus = "in_progress"
-    else if (order.status === "in_progress") newStatus = "done"
-    else return
-
-    // PATCH ke API
-    await fetch(`/api/orders/${order.id}`, {
+  const updateStatus = async (orderId: number, status: Order["status"]) => {
+    const res = await fetch(`/api/orders/${orderId}`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ status: newStatus }),
+      body: JSON.stringify({ status }),
     })
 
-    // Update state lokal
+    if (!res.ok) return
+
     setOrders((prev) =>
-      prev.map((o) => (o.id === order.id ? { ...o, status: newStatus } : o))
+      prev.map((o) =>
+        o.id === orderId ? { ...o, status } : o
+      )
     )
   }
 
@@ -59,20 +58,6 @@ export default function Dashboard() {
 
     fetchOrders()
   }, [])
-
-  const getButtonLabel = (status: Order["status"]) => {
-    if (status === "pending") return "Progress"
-    if (status === "in_progress") return "Selesai"
-    if (status === "done") return "Selesai ✔"
-    return ""
-  }
-
-  const getButtonColor = (status: Order["status"]) => {
-    if (status === "pending") return "bg-yellow-500"
-    if (status === "in_progress") return "bg-blue-500"
-    if (status === "done") return "bg-green-500"
-    return "bg-gray-500"
-  }
 
   return (
     <div>
@@ -88,6 +73,7 @@ export default function Dashboard() {
                   order.status === "done" ? "opacity-70" : ""
                 }`}
               >
+                <h1>Order ID: {order.id}</h1>
                 <h1>ID User: {order.user_id}</h1>
                 <h1>Nama: {order.nama}</h1>
                 <h1>Alamat: {order.address}</h1>
@@ -96,15 +82,32 @@ export default function Dashboard() {
                 <h1>Tgl Acara: {formatDate(order.wedding_date)}</h1>
                 <h1>Waktu Acara: {order.wedding_time}</h1>
                 <h1>Tgl Pengembalian: {formatDate(order.return_date)}</h1>
-                <button
-                  onClick={() => updateStatus(order)}
-                  disabled={order.status === "done"}
-                  className={`border rounded-md text-white font-semibold ${getButtonColor(
-                    order.status
-                  )}`}
-                >
-                  {getButtonLabel(order.status)}
-                </button>
+
+                <div>
+                  <h1>Product:</h1>
+                  {order.items.map((item, idx) => (
+                    <h1 key={idx}>- {item.product_name}</h1>
+                  ))}
+                </div>
+
+                  <select
+                    value={order.status}
+                    onChange={(e) =>
+                      updateStatus(order.id, e.target.value as Order["status"])
+                    }
+                    disabled={order.status === "done"}
+                    className={`border rounded-md font-semibold px-2 py-1 text-white
+                      ${order.status === "pending" && "bg-yellow-500"}
+                      ${order.status === "progress" && "bg-blue-500"}
+                      ${order.status === "done" && "bg-green-600"}
+                      ${order.status === "done" && "opacity-70 cursor-not-allowed"}
+                    `}
+                  >
+                    <option value="pending">Pending</option>
+                    <option value="progress">Progress</option>
+                    <option value="done">Done</option>
+                  </select>
+
               </div>
             ))}
 
