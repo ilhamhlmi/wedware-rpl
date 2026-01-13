@@ -15,12 +15,16 @@ export default function Produk() {
           console.error("Gagal fetch produk:", res.statusText);
           return;
         }
+
         const data = await res.json();
-        // Pastikan setiap produk punya image_url
+
         const productsWithImage = (data.products || []).map((p: any) => ({
           ...p,
-          image_url: p.image_url || "https://via.placeholder.com/400x400?text=Produk+Tanpa+Gambar"
+          image_url:
+            p.image_url ||
+            "https://via.placeholder.com/400x400?text=Produk+Tanpa+Gambar",
         }));
+
         setProducts(productsWithImage);
       } catch (err) {
         console.error("Error fetch produk:", err);
@@ -36,10 +40,15 @@ export default function Produk() {
     if (!confirm("Apakah yakin ingin menghapus produk ini?")) return;
 
     try {
-      const res = await fetch(`/api/products?id=${id}`, { method: "DELETE" });
+      const res = await fetch(`/api/products?id=${id}`, {
+        method: "DELETE",
+      });
+
       if (!res.ok) throw new Error("Gagal menghapus produk");
 
-      setProducts(products.filter(p => p.id !== id));
+      // FIX: gunakan functional update (lebih aman)
+      setProducts((prev) => prev.filter((p) => p.id !== id));
+
       alert("Produk berhasil dihapus");
     } catch (err) {
       console.error(err);
@@ -50,6 +59,7 @@ export default function Produk() {
   return (
     <div>
       <AdminNavbar />
+
       <div className="px-4 w-full flex items-center justify-center mt-3">
         <div className="container mx-auto text-center">
           <Link
@@ -98,7 +108,8 @@ export default function Produk() {
                     Stok: {product.stock}
                   </h1>
                   <h1 className="font-poppins text-neutral-900 font-semibold">
-                    Harga Sewa: Rp. {product.price.toLocaleString()} / Hari
+                    Harga Sewa: Rp.{" "}
+                    {Number(product.price).toLocaleString()} / Hari
                   </h1>
 
                   <Link
