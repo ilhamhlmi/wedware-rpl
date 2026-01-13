@@ -13,19 +13,18 @@ type LaporanWorker = {
   fitting: string;
   wedding: string;
   pengembalian: string;
-  ket_ukuran: string;
+  ket_ukuran: string | null;
 };
 
 export default function LaporanWorker() {
-
   const formatDate = (dateString: string) => {
-  if (!dateString) return "-";
-  return new Date(dateString).toLocaleDateString("id-ID", {
-    day: "2-digit",
-    month: "long",
-    year: "numeric",
-  });
-};
+    if (!dateString) return "-";
+    return new Date(dateString).toLocaleDateString("id-ID", {
+      day: "2-digit",
+      month: "long",
+      year: "numeric",
+    });
+  };
 
   const [laporan, setLaporan] = useState<LaporanWorker[]>([]);
 
@@ -58,7 +57,6 @@ export default function LaporanWorker() {
       <section className="w-full flex items-center justify-center px-4 mt-3 mb-5">
         <div className="container mx-auto py-2">
           <div className="grid grid-cols-4 gap-5">
-
             {laporan.map((item) => (
               <div
                 key={item.id}
@@ -69,6 +67,7 @@ export default function LaporanWorker() {
                   alt="bukpem"
                   width={300}
                   height={400}
+                  unoptimized
                 />
 
                 <h1 className="font-poppins text-neutral-900">
@@ -97,7 +96,7 @@ export default function LaporanWorker() {
                 </h1>
 
                 <h1 className="font-poppins text-neutral-900">
-                  Keterangan Uk: {item.ket_ukuran}
+                  Keterangan Uk: {item.ket_ukuran ?? "-"}
                 </h1>
 
                 <button
@@ -108,7 +107,6 @@ export default function LaporanWorker() {
                 </button>
               </div>
             ))}
-
           </div>
         </div>
       </section>

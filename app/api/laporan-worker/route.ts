@@ -1,5 +1,12 @@
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
+import { createClient } from "@supabase/supabase-js";
+
+/* SUPABASE SERVER CLIENT */
+            // const supabase = createClient(
+            //   process.env.SUPABASE_URL!,
+            //   process.env.SUPABASE_SERVICE_ROLE_KEY! // SERVER ONLY
+            // );
 
 /* GET LAPORAN WORKER */
 export async function GET() {
@@ -31,6 +38,69 @@ export async function GET() {
   } catch (error) {
     console.error("GET LAPORAN ERROR:", error);
     return NextResponse.json([], { status: 500 });
+  }
+}
+
+/* POST LAPORAN WORKER */
+export async function POST(req: Request) {
+  try {
+    const formData = await req.formData();
+
+    const order_id = formData.get("order_id");
+    const ket_ukuran = formData.get("ket_ukuran") as string;
+    const bukti = formData.get("bukti_pembayaran") as File;
+
+    if (!order_id || !bukti || !ket_ukuran?.trim()) {
+      return NextResponse.json(
+        { message: "Data laporan tidak lengkap" },
+        { status: 400 }
+      );
+    }
+
+    /**
+     * CATATAN PENTING
+     * Ganti ini dengan worker_id dari session / cookie
+     */
+    const worker_id = 1;
+
+    //  Upload ke Supabase Storage
+              // const filePath = `bukti/${Date.now()}-${bukti.name}`;
+
+              // const { error } = await supabase.storage
+              //   .from("laporan-worker")
+              //   .upload(filePath, bukti, {
+              //     contentType: bukti.type,
+              //     upsert: false,
+              //   });
+
+              // if (error) throw error;
+
+              // const { data } = supabase.storage
+              //   .from("laporan-worker")
+              //   .getPublicUrl(filePath);
+
+    //  Simpan ke database
+    await db.query(
+      `
+      INSERT INTO laporan_worker
+        (order_id, worker_id, bukti_pembayaran, ket_ukuran)
+      VALUES (?, ?, ?, ?)
+      `,
+      [
+        order_id,
+        worker_id,
+        // data.publicUrl,
+        ket_ukuran,
+      ]
+    );
+
+    return NextResponse.json({ success: true });
+  } catch (error) {
+    console.error("POST LAPORAN ERROR:", error);
+    return NextResponse.json(
+      { message: "Gagal mengirim laporan" },
+      { status: 500 }
+    );
   }
 }
 

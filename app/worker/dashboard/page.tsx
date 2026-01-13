@@ -15,7 +15,6 @@ interface Order {
   wedding_time: string | null;
   return_date: string | null;
   products: string | null;
-
 }
 
 const formatDate = (date?: string | null) =>
@@ -31,8 +30,7 @@ export default function WorkerDashboard() {
   const [selected, setSelected] = useState<Order | null>(null);
   const [file, setFile] = useState<File | null>(null);
   const [workerName, setWorkerName] = useState("");
-  const [ketUkuran, setKetUkuran] = useState("");
-
+  const [ket_ukuran, setKetUkuran] = useState("");
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -66,9 +64,15 @@ export default function WorkerDashboard() {
       return;
     }
 
+    if (!ket_ukuran.trim()) {
+      alert("Keterangan ukuran wajib diisi");
+      return;
+    }
+
     const formData = new FormData();
     formData.append("order_id", String(selected.order_id));
     formData.append("bukti_pembayaran", file);
+    formData.append("ket_ukuran", ket_ukuran);
 
     const res = await fetch("/api/worker/laporan", {
       method: "POST",
@@ -78,10 +82,25 @@ export default function WorkerDashboard() {
 
     if (res.ok) {
       alert("Laporan berhasil dikirim");
+
+      // reset state (UX lebih rapi)
+      setSelected(null);
+      setFile(null);
+      setKetUkuran("");
+
       location.reload();
     } else {
       alert("Gagal mengirim laporan");
     }
+  };
+
+  const handleLogout = async () => {
+    await fetch("/api/worker/logout", {
+      method: "POST",
+      credentials: "include",
+    });
+
+    window.location.href = "/worker/login";
   };
 
   if (loading) {
@@ -91,16 +110,6 @@ export default function WorkerDashboard() {
       </div>
     );
   }
-
-    const handleLogout = async () => {
-    await fetch("/api/worker/logout", {
-      method: "POST",
-      credentials: "include",
-    });
-
-    window.location.href = "/worker/login";
-  };
-
 
   return (
     <section className="relative min-h-screen text-ivory">
@@ -118,8 +127,7 @@ export default function WorkerDashboard() {
           </h2>
 
           <select
-            className="w-full mb-6 p-3 rounded-lg bg-white/90 text-gray-900
-                       border border-white/40"
+            className="w-full mb-6 p-3 rounded-lg bg-white/90 text-gray-900 border border-white/40"
             onChange={(e) =>
               setSelected(
                 orders.find(o => o.order_id === Number(e.target.value)) || null
@@ -154,21 +162,22 @@ export default function WorkerDashboard() {
               <ReadOnlyInput label="Produk" value={selected.products} />
 
               <div>
-                <label className="text-sm block mb-1">Keterangan Ukuran (Manual)</label>
+                <label className="text-sm block mb-1">
+                  Keterangan Ukuran (Manual)
+                </label>
                 <textarea
-                  value={ketUkuran}
+                  value={ket_ukuran}
                   onChange={(e) => setKetUkuran(e.target.value)}
                   className="w-full p-3 rounded-lg bg-white/90 text-gray-900"
                   placeholder="Contoh: Lingkar dada 90cm, panjang lengan 55cm"
                 />
               </div>
 
-
-
               <div>
                 <label className="text-sm block mb-1">Bukti Pembayaran</label>
                 <input
                   type="file"
+                  accept="image/*"
                   className="w-full p-3 rounded-lg bg-white/90 text-gray-900"
                   onChange={(e) => setFile(e.target.files?.[0] || null)}
                 />
@@ -180,12 +189,13 @@ export default function WorkerDashboard() {
               >
                 Kirim Laporan
               </button>
-                          <button
-              onClick={handleLogout}
-              className="w-full bg-primary border rounded-full px-6 py-2 border-red-500 bg-red-500 hover:bg-red-700 duration-200 text-white font-poppins cursor-pointer"
-            >
-              Logout
-            </button>
+
+              <button
+                onClick={handleLogout}
+                className="w-full bg-primary border rounded-full px-6 py-2 border-red-500 bg-red-500 hover:bg-red-700 duration-200 text-white font-poppins cursor-pointer"
+              >
+                Logout
+              </button>
             </div>
           )}
         </div>
