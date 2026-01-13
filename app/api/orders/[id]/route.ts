@@ -5,10 +5,10 @@ import { db } from "@/lib/db";
 
 export async function PATCH(
   req: Request,
-  { params }: { params: { id: string } }
+  context: any
 ) {
   try {
-    const orderId = params.id;
+    const orderId = context.params.id;
     const { status } = await req.json();
 
     if (!orderId || !status) {
@@ -18,7 +18,6 @@ export async function PATCH(
       );
     }
 
-    // SESUAI DATABASE
     if (!["pending", "progress", "done"].includes(status)) {
       return NextResponse.json(
         { message: "Status tidak valid" },
@@ -40,3 +39,4 @@ export async function PATCH(
     );
   }
 }
+
