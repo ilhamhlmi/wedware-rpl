@@ -27,12 +27,14 @@ export default function WomensWear() {
                             <div className="flex w-full items-center justify-between px-4 mt-3">
                                 <h1 className="font-poppins">Busana Wanita 1</h1>
                                 <button
-                                    onClick={() =>
+                                    onClick={() => {
                                         addToCart({
                                             id: "women-1",
                                             name: "Busana Wanita 1",
                                             image: women1.src,
                                         })
+                                        alert("Produk berhasil ditambahkan ke keranjang")
+                                    }
                                     }
                                     className="font-poppins  border rounded-full px-2 text-white border-olivegreen bg-olivegreen font-semibold text-lg cursor-pointer">+</button>
                             </div>
@@ -48,12 +50,14 @@ export default function WomensWear() {
                             <div className="flex w-full items-center justify-between px-4 mt-3">
                                 <h1 className="font-poppins">Busana Wanita 2</h1>
                                 <button
-                                    onClick={() =>
+                                    onClick={() => {
                                         addToCart({
                                             id: "women-2",
                                             name: "Busana Wanita 2",
                                             image: women2.src,
                                         })
+                                        alert("Produk berhasil ditambahkan ke keranjang")
+                                    }
                                     }
                                     className="font-poppins  border rounded-full px-2 text-white border-olivegreen bg-olivegreen font-semibold text-lg cursor-pointer">+</button>
                             </div>
@@ -69,12 +73,14 @@ export default function WomensWear() {
                             <div className="flex w-full items-center justify-between px-4 mt-3">
                                 <h1 className="font-poppins">Busana Wanita 3</h1>
                                 <button
-                                    onClick={() =>
+                                    onClick={() => {
                                         addToCart({
                                             id: "women-3",
                                             name: "Busana Wanita 3",
                                             image: women3.src,
                                         })
+                                        alert("Produk berhasil ditambahkan ke keranjang")
+                                    }
                                     }
                                     className="font-poppins  border rounded-full px-2 text-white border-olivegreen bg-olivegreen font-semibold text-lg cursor-pointer">+</button>
                             </div>
@@ -90,12 +96,14 @@ export default function WomensWear() {
                             <div className="flex w-full items-center justify-between px-4 mt-3">
                                 <h1 className="font-poppins">Busana Wanita 4</h1>
                                 <button
-                                    onClick={() =>
+                                    onClick={() => {
                                         addToCart({
                                             id: "women-4",
                                             name: "Busana Wanita 4",
                                             image: women4.src,
                                         })
+                                        alert("Produk berhasil ditambahkan ke keranjang")
+                                    }
                                     }
                                     className="font-poppins  border rounded-full px-2 text-white border-olivegreen bg-olivegreen font-semibold text-lg cursor-pointer">+</button>
                             </div>

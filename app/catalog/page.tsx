@@ -28,14 +28,16 @@ export default function Catalog() {
                             <div className="flex w-full items-center justify-between px-4 mt-3">
                                 <h1 className="font-poppins">Gaun Pengantin 1</h1>
                                 <button
-                                    onClick={() =>
+                                    onClick={() => {
                                         addToCart({
                                             id: "dress-1",
                                             name: "Gaun Pengantin 1",
                                             image: dress1.src,
                                         })
+                                        alert("Produk berhasil ditambahkan ke keranjang")
                                     }
-                                    className="font-poppins  border rounded-full px-2 text-white border-olivegreen bg-olivegreen font-semibold text-lg cursor-pointer">+</button>
+                                    }
+                                    className="font-poppins  border rounded-full px-2 text-white border-olivegreen bg-olivegreen font-semibold text-lg cursor-pointer hover:bg-olivegreen-hover  duration-200 shadow-md hover:shadow-xl">+</button>
                             </div>
                             <div className="flex w-full items-center justify-between px-4">
                                 <h1 className="font-poppins text-gray-500">S - XXL</h1>
@@ -49,14 +51,16 @@ export default function Catalog() {
                             <div className="flex w-full items-center justify-between px-4 mt-3">
                                 <h1 className="font-poppins">Gaun Pengantin 2</h1>
                                 <button
-                                    onClick={() =>
+                                    onClick={() => {
                                         addToCart({
                                             id: "dress-2",
                                             name: "Gaun Pengantin 2",
-                                            image: dress2.src,
+                                            image: dress1.src,
                                         })
+                                        alert("Produk berhasil ditambahkan ke keranjang")
                                     }
-                                    className="font-poppins  border rounded-full px-2 text-white border-olivegreen bg-olivegreen font-semibold text-lg cursor-pointer">+</button>
+                                    }
+                                    className="font-poppins  border rounded-full px-2 text-white border-olivegreen bg-olivegreen font-semibold text-lg cursor-pointer hover:bg-olivegreen-hover  duration-200 shadow-md hover:shadow-xl">+</button>
                             </div>
                             <div className="flex w-full items-center justify-between px-4">
                                 <h1 className="font-poppins text-gray-500">S - XXL</h1>
@@ -70,14 +74,16 @@ export default function Catalog() {
                             <div className="flex w-full items-center justify-between px-4 mt-3">
                                 <h1 className="font-poppins">Gaun Pengantin 3</h1>
                                 <button
-                                    onClick={() =>
+                                    onClick={() => {
                                         addToCart({
                                             id: "dress-3",
                                             name: "Gaun Pengantin 3",
-                                            image: dress3.src,
+                                            image: dress1.src,
                                         })
+                                        alert("Produk berhasil ditambahkan ke keranjang")
                                     }
-                                    className="font-poppins  border rounded-full px-2 text-white border-olivegreen bg-olivegreen font-semibold text-lg cursor-pointer">+</button>
+                                    }
+                                    className="font-poppins  border rounded-full px-2 text-white border-olivegreen bg-olivegreen font-semibold text-lg cursor-pointer hover:bg-olivegreen-hover  duration-200 shadow-md hover:shadow-xl">+</button>
                             </div>
                             <div className="flex w-full items-center justify-between px-4">
                                 <h1 className="font-poppins text-gray-500">S - XXL</h1>
@@ -91,14 +97,16 @@ export default function Catalog() {
                             <div className="flex w-full items-center justify-between px-4 mt-3">
                                 <h1 className="font-poppins">Gaun Pengantin 4</h1>
                                 <button
-                                    onClick={() =>
+                                    onClick={() => {
                                         addToCart({
                                             id: "dress-4",
                                             name: "Gaun Pengantin 4",
-                                            image: dress4.src,
+                                            image: dress1.src,
                                         })
+                                        alert("Produk berhasil ditambahkan ke keranjang")
                                     }
-                                    className="font-poppins  border rounded-full px-2 text-white border-olivegreen bg-olivegreen font-semibold text-lg cursor-pointer">+</button>
+                                    }
+                                    className="font-poppins  border rounded-full px-2 text-white border-olivegreen bg-olivegreen font-semibold text-lg cursor-pointer hover:bg-olivegreen-hover  duration-200 shadow-md hover:shadow-xl">+</button>
                             </div>
                             <div className="flex w-full items-center justify-between px-4">
                                 <h1 className="font-poppins text-gray-500">S - XXL</h1>

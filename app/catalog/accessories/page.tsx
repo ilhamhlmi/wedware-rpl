@@ -28,12 +28,14 @@ export default function Aksesori() {
                             <div className="flex w-full items-center justify-between px-4 mt-3">
                                 <h1 className="font-poppins">Aksesori 1</h1>
                                 <button
-                                    onClick={() =>
+                                    onClick={() => {
                                         addToCart({
                                             id: "acc-1",
                                             name: "Aksesori 1",
                                             image: acc1.src,
                                         })
+                                        alert("Produk berhasil ditambahkan ke keranjang")
+                                    }
                                     }
                                     className="font-poppins  border rounded-full px-2 text-white border-olivegreen bg-olivegreen font-semibold text-lg cursor-pointer">+</button>
                             </div>
@@ -46,12 +48,14 @@ export default function Aksesori() {
                             <div className="flex w-full items-center justify-between px-4 mt-3">
                                 <h1 className="font-poppins">Aksesori 2</h1>
                                 <button
-                                    onClick={() =>
+                                    onClick={() => {
                                         addToCart({
                                             id: "acc-2",
                                             name: "Aksesori 2",
                                             image: acc2.src,
                                         })
+                                        alert("Produk berhasil ditambahkan ke keranjang")
+                                    }
                                     }
                                     className="font-poppins  border rounded-full px-2 text-white border-olivegreen bg-olivegreen font-semibold text-lg cursor-pointer">+</button>
                             </div>
@@ -64,12 +68,14 @@ export default function Aksesori() {
                             <div className="flex w-full items-center justify-between px-4 mt-3">
                                 <h1 className="font-poppins">Aksesori 3</h1>
                                 <button
-                                    onClick={() =>
+                                    onClick={() => {
                                         addToCart({
                                             id: "acc-3",
                                             name: "Aksesori 3",
                                             image: acc3.src,
                                         })
+                                        alert("Produk berhasil ditambahkan ke keranjang")
+                                    }
                                     }
                                     className="font-poppins  border rounded-full px-2 text-white border-olivegreen bg-olivegreen font-semibold text-lg cursor-pointer">+</button>
                             </div>
@@ -82,12 +88,14 @@ export default function Aksesori() {
                             <div className="flex w-full items-center justify-between px-4 mt-3">
                                 <h1 className="font-poppins">Aksesori 4</h1>
                                 <button
-                                    onClick={() =>
+                                    onClick={() => {
                                         addToCart({
                                             id: "acc-4",
                                             name: "Aksesori 4",
                                             image: dummy.src,
                                         })
+                                        alert("Produk berhasil ditambahkan ke keranjang")
+                                    }
                                     }
                                     className="font-poppins  border rounded-full px-2 text-white border-olivegreen bg-olivegreen font-semibold text-lg cursor-pointer">+</button>
                             </div>

@@ -14,17 +14,17 @@ export async function GET() {
 
     const [rows] = await db.execute(
       `
-      SELECT
-        oi.created_at AS tanggal,
-        oi.order_id,
-        o.status
-      FROM order_items oi
-      JOIN orders o ON o.id = oi.order_id
-      WHERE o.user_id = ?
-      ORDER BY oi.created_at DESC
-      `,
+  SELECT
+    o.created_at AS tanggal,
+    o.id AS order_id,
+    o.status
+  FROM orders o
+  WHERE o.user_id = ?
+  ORDER BY o.created_at DESC
+  `,
       [userId]
     );
+
 
     return NextResponse.json(rows);
   } catch (error) {

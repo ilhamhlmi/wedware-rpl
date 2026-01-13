@@ -27,12 +27,15 @@ export default function MensWear() {
                             <div className="flex w-full items-center justify-between px-4 mt-3">
                                 <h1 className="font-poppins">Busana Pria 1</h1>
                                 <button
-                                    onClick={() =>
+                                    onClick={() => {
                                         addToCart({
                                             id: "men-1",
                                             name: "Busana Pria 1",
                                             image: men1.src,
-                                        })}
+                                        })
+                                        alert("Produk berhasil ditambahkan ke keranjang")
+                                    }
+                                    }
                                     className="font-poppins  border rounded-full px-2 text-white border-olivegreen bg-olivegreen font-semibold text-lg cursor-pointer">+</button>
                             </div>
                             <div className="flex w-full items-center justify-between px-4">
@@ -47,12 +50,14 @@ export default function MensWear() {
                             <div className="flex w-full items-center justify-between px-4 mt-3">
                                 <h1 className="font-poppins">Busana Pria 2</h1>
                                 <button
-                                    onClick={() =>
+                                    onClick={() => {
                                         addToCart({
                                             id: "men-2",
                                             name: "Busana Pria 2",
                                             image: men2.src,
                                         })
+                                        alert("Produk berhasil ditambahkan ke keranjang")
+                                    }
                                     }
                                     className="font-poppins  border rounded-full px-2 text-white border-olivegreen bg-olivegreen font-semibold text-lg cursor-pointer">+</button>
                             </div>
@@ -68,12 +73,14 @@ export default function MensWear() {
                             <div className="flex w-full items-center justify-between px-4 mt-3">
                                 <h1 className="font-poppins">Busana Pria 3</h1>
                                 <button
-                                    onClick={() =>
+                                    onClick={() => {
                                         addToCart({
                                             id: "men-3",
                                             name: "Busana Pria 3",
                                             image: men3.src,
                                         })
+                                        alert("Produk berhasil ditambahkan ke keranjang")
+                                    }
                                     }
                                     className="font-poppins  border rounded-full px-2 text-white border-olivegreen bg-olivegreen font-semibold text-lg cursor-pointer">+</button>
                             </div>
@@ -89,12 +96,14 @@ export default function MensWear() {
                             <div className="flex w-full items-center justify-between px-4 mt-3">
                                 <h1 className="font-poppins">Busana Pria 4</h1>
                                 <button
-                                    onClick={() =>
+                                    onClick={() => {
                                         addToCart({
                                             id: "men-4",
                                             name: "Busana Pria 4",
                                             image: men4.src,
                                         })
+                                        alert("Produk berhasil ditambahkan ke keranjang")
+                                    }
                                     }
                                     className="font-poppins  border rounded-full px-2 text-white border-olivegreen bg-olivegreen font-semibold text-lg cursor-pointer">+</button>
                             </div>
