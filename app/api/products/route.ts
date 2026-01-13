@@ -180,3 +180,117 @@ export async function DELETE(req: Request) {
     );
   }
 }
+
+export async function PUT(req: Request) {
+  try {
+    const formData = await req.formData();
+
+    const id = formData.get("id")?.toString();
+    const name = formData.get("name")?.toString().trim();
+    const category = formData.get("category")?.toString().trim();
+    const size = formData.get("size")?.toString().trim() || null;
+    const stock = Number(formData.get("stock"));
+    const price = Number(formData.get("price"));
+    const file = formData.get("image") as File | null;
+
+    if (!id) {
+      return NextResponse.json(
+        { message: "ID produk wajib ada" },
+        { status: 400 }
+      );
+    }
+
+    if (!name || !category || isNaN(stock) || stock < 0 || isNaN(price) || price <= 0) {
+      return NextResponse.json(
+        { message: "Data tidak valid" },
+        { status: 400 }
+      );
+    }
+
+    // Ambil data lama
+    const [rows]: any = await db.execute(
+      `SELECT image_url FROM products WHERE id = ?`,
+      [id]
+    );
+
+    if (rows.length === 0) {
+      return NextResponse.json(
+        { message: "Produk tidak ditemukan" },
+        { status: 404 }
+      );
+    }
+
+    let imageUrl = rows[0].image_url;
+
+    // Kalau ada gambar baru → upload & ganti
+    if (file && file.size > 0) {
+      const allowedTypes = ["image/jpeg", "image/jpg", "image/png", "image/webp"];
+      if (!allowedTypes.includes(file.type)) {
+        return NextResponse.json(
+          { message: "Format file tidak didukung" },
+          { status: 400 }
+        );
+      }
+
+      if (file.size > 2 * 1024 * 1024) {
+        return NextResponse.json(
+          { message: "Ukuran file maksimal 2MB" },
+          { status: 400 }
+        );
+      }
+
+      // Upload baru
+      const ext = file.name.split(".").pop();
+      const fileName = `${Date.now()}-${Math.random().toString(36).substring(7)}.${ext}`;
+      const buffer = Buffer.from(await file.arrayBuffer());
+
+      const { error: uploadError } = await supabase.storage
+        .from("products")
+        .upload(fileName, buffer, {
+          contentType: file.type,
+          upsert: false,
+        });
+
+      if (uploadError) {
+        return NextResponse.json(
+          { message: `Gagal upload gambar: ${uploadError.message}` },
+          { status: 500 }
+        );
+      }
+
+      // Ambil URL baru
+      const { data: urlData } = supabase.storage
+        .from("products")
+        .getPublicUrl(fileName);
+
+      const newImageUrl = urlData.publicUrl;
+
+      // Hapus gambar lama
+      if (imageUrl) {
+        const oldFileName = imageUrl.split("/").pop();
+        await supabase.storage.from("products").remove([oldFileName!]);
+      }
+
+      imageUrl = newImageUrl;
+    }
+
+    // Update database
+    await db.execute(
+      `UPDATE products 
+       SET name = ?, category = ?, size = ?, stock = ?, price = ?, image_url = ?
+       WHERE id = ?`,
+      [name, category, size, stock, price, imageUrl, id]
+    );
+
+    return NextResponse.json({
+      message: "Produk berhasil diupdate",
+      imageUrl,
+    });
+  } catch (err) {
+    console.error("❌ UPDATE PRODUCT ERROR:", err);
+    return NextResponse.json(
+      { message: "Gagal mengupdate produk" },
+      { status: 500 }
+    );
+  }
+}
