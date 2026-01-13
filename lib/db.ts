@@ -1,11 +1,14 @@
 import mysql from "mysql2/promise";
 
 export const db = mysql.createPool({
-  host: "localhost",
+  host: "centerbeam.proxy.rlwy.net",
   user: "root",
-  password: "",
-  database: "wedware",
-  port: 3306,
+  password: "iJsBtnAnroQzPlkeRUmUvdrGwpLAIEJd",
+  database: "railway",
+  port: 30911,
+  waitForConnections: true,
+  connectionLimit: 10,
+  queueLimit: 0,
 });
 
 
