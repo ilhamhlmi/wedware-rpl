@@ -9,8 +9,8 @@ export const runtime = "nodejs";
  * WAJIB selalu dibuat (tidak pakai conditional NODE_ENV)
  */
 const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+  process.env.SUPABASE_URL!,
+  process.env.SUPABASE_SERVICE_ROLE_KEY!
 );
 
 /* GET -> ambil semua produk */
