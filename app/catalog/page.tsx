@@ -112,7 +112,7 @@ export default function Catalog() {
                                 <h1 className="font-poppins text-gray-500">S - XXL</h1>
                             </div>
                             <div className="flex w-full items-center justify-between px-4 mb-3">
-                                <h1 className="font-poppins text-gray-500">Mulai dari Rp. 1.500.000 -</h1>
+                                <h1 className="font-poppins text-gray-600">Mulai dari Rp. 1.500.000 -</h1>
                             </div>
                         </div>
                     </div>
