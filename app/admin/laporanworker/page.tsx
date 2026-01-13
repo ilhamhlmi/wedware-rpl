@@ -82,7 +82,7 @@ export default function LaporanWorker() {
                 </h1>
 
                 <h1 className="font-poppins text-neutral-900">
-                  Produk: {item.product_name ?? "-"}
+                  Product: {item.product_name ?? "-"}
                 </h1>
 
                 <h1 className="font-poppins text-neutral-900">
