@@ -132,3 +132,52 @@ export async function POST(req: Request) {
     );
   }
 }
+
+/* DELETE -> hapus produk */
+export async function DELETE(req: Request) {
+  try {
+    const { searchParams } = new URL(req.url);
+    const id = searchParams.get("id");
+
+    if (!id) {
+      return NextResponse.json(
+        { message: "ID produk tidak ditemukan" },
+        { status: 400 }
+      );
+    }
+
+    // Ambil dulu data produk (kalau mau sekalian hapus gambarnya di Supabase)
+    const [rows]: any = await db.execute(
+      `SELECT image_url FROM products WHERE id = ?`,
+      [id]
+    );
+
+    if (rows.length === 0) {
+      return NextResponse.json(
+        { message: "Produk tidak ditemukan" },
+        { status: 404 }
+      );
+    }
+
+    const imageUrl = rows[0].image_url;
+
+    // Hapus data dari database
+    await db.execute(`DELETE FROM products WHERE id = ?`, [id]);
+
+    // (Opsional tapi bagus) hapus file dari Supabase Storage
+    if (imageUrl) {
+      const fileName = imageUrl.split("/").pop(); // ambil nama file
+      await supabase.storage.from("products").remove([fileName!]);
+    }
+
+    return NextResponse.json({
+      message: "Produk berhasil dihapus",
+    });
+  } catch (err) {
+    console.error("❌ DELETE PRODUCT ERROR:", err);
+    return NextResponse.json(
+      { message: "Gagal menghapus produk" },
+      { status: 500 }
+    );
+  }
+}
