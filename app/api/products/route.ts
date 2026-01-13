@@ -4,31 +4,11 @@ import { createClient } from "@supabase/supabase-js";
 
 export const runtime = "nodejs";
 
-/**
- *  SERVER SUPABASE CLIENT
- * WAJIB pakai SERVICE ROLE
- */
+// SERVER SUPABASE CLIENT (SERVICE ROLE)
 const supabase = createClient(
   process.env.SUPABASE_URL!,
   process.env.SUPABASE_SERVICE_ROLE_KEY!
 );
-
-/* GET -> ambil semua produk */
-export async function GET() {
-  try {
-    const [rows]: any = await db.query(
-      "SELECT id, name, category, size, stock, price, image_url FROM products"
-    );
-
-    return NextResponse.json({ products: rows });
-  } catch (err) {
-    console.error("GET PRODUCT ERROR:", err);
-    return NextResponse.json(
-      { message: "Gagal mengambil produk" },
-      { status: 500 }
-    );
-  }
-}
 
 /* POST -> tambah produk */
 export async function POST(req: Request) {
@@ -40,27 +20,43 @@ export async function POST(req: Request) {
     const size = formData.get("size")?.toString().trim() || null;
     const stock = Number(formData.get("stock"));
     const price = Number(formData.get("price"));
-    const file = formData.get("image") as File | null;
+    const file = formData.get("image") as File;
 
-    if (!name || !category || stock < 0 || price <= 0 || !file) {
+    // VALIDASI KETAT
+    if (
+      !name ||
+      !category ||
+      stock < 0 ||
+      price <= 0 ||
+      !file ||
+      file.size === 0
+    ) {
       return NextResponse.json(
-        { message: "Data tidak valid" },
+        { message: "Data atau file tidak valid" },
         { status: 400 }
       );
     }
 
+    // DEBUG (boleh hapus nanti)
+    console.log("UPLOAD FILE:", {
+      name: file.name,
+      size: file.size,
+      type: file.type,
+    });
+
     const ext = file.name.split(".").pop();
-    const filePath = `products/${Date.now()}.${ext}`; // ✅ FIX
+    const filePath = `${Date.now()}.${ext}`;
     const buffer = Buffer.from(await file.arrayBuffer());
 
     const { error: uploadError } = await supabase.storage
       .from("products")
       .upload(filePath, buffer, {
         contentType: file.type,
+        upsert: false,
       });
 
     if (uploadError) {
-      console.error("UPLOAD ERROR:", uploadError);
+      console.error("SUPABASE UPLOAD ERROR:", uploadError);
       return NextResponse.json({ uploadError }, { status: 500 });
     }
 
