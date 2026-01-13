@@ -5,8 +5,8 @@ import { createClient } from "@supabase/supabase-js";
 export const runtime = "nodejs";
 
 /**
- * SUPABASE SERVER CLIENT
- * WAJIB selalu dibuat (tidak pakai conditional NODE_ENV)
+ *  SERVER SUPABASE CLIENT
+ * WAJIB pakai SERVICE ROLE
  */
 const supabase = createClient(
   process.env.SUPABASE_URL!,
@@ -30,7 +30,7 @@ export async function GET() {
   }
 }
 
-/*  POST -> tambah produk */
+/* POST -> tambah produk */
 export async function POST(req: Request) {
   try {
     const formData = await req.formData();
@@ -42,26 +42,27 @@ export async function POST(req: Request) {
     const price = Number(formData.get("price"));
     const file = formData.get("image") as File | null;
 
-    if (!name || !category || stock <= 0 || price <= 0 || !file) {
+    if (!name || !category || stock < 0 || price <= 0 || !file) {
       return NextResponse.json(
         { message: "Data tidak valid" },
         { status: 400 }
       );
     }
 
-    /* ===== UPLOAD KE SUPABASE ===== */
     const ext = file.name.split(".").pop();
-    const filePath = `products/${Date.now()}.${ext}`;
+    const filePath = `products/${Date.now()}.${ext}`; // ✅ FIX
     const buffer = Buffer.from(await file.arrayBuffer());
 
-    const { error } = await supabase.storage
+    const { error: uploadError } = await supabase.storage
       .from("products")
       .upload(filePath, buffer, {
         contentType: file.type,
-        upsert: false,
       });
 
-    if (error) throw error;
+    if (uploadError) {
+      console.error("UPLOAD ERROR:", uploadError);
+      return NextResponse.json({ uploadError }, { status: 500 });
+    }
 
     const { data } = supabase.storage
       .from("products")
@@ -69,8 +70,7 @@ export async function POST(req: Request) {
 
     const imageUrl = data.publicUrl;
 
-    /* ===== SIMPAN KE DATABASE ===== */
-    const [result]: any = await db.execute(
+    await db.execute(
       `INSERT INTO products (name, category, size, stock, price, image_url)
        VALUES (?, ?, ?, ?, ?, ?)`,
       [name, category, size, stock, price, imageUrl]
@@ -78,7 +78,6 @@ export async function POST(req: Request) {
 
     return NextResponse.json({
       message: "Produk berhasil ditambahkan",
-      productId: result.insertId,
       imageUrl,
     });
   } catch (err) {
