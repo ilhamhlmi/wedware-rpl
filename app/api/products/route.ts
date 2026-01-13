@@ -5,7 +5,7 @@ import { supabase } from "@/lib/supabase";
 export const runtime = "nodejs";
 
 // GET -> fetch semua produk
-export async function GET(req: Request) {
+export async function GET() {
   try {
     const [rows]: any = await db.query(
       "SELECT id, name, category, size, stock, price, image_url FROM products"
@@ -20,9 +20,7 @@ export async function GET(req: Request) {
   }
 }
 
-
 // POST -> tambah produk baru
-
 export async function POST(req: Request) {
   try {
     const formData = await req.formData();
@@ -42,35 +40,37 @@ export async function POST(req: Request) {
       );
     }
 
-    let imageUrl: string;
+    let imageUrl = "https://via.placeholder.com/400x400?text=Tanpa+Gambar";
+
     if (uploadedFile) {
-      if (process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
-        try {
-          const filePath = `products/${Date.now()}_${uploadedFile.name}`;
-          const buffer = Buffer.from(await uploadedFile.arrayBuffer());
+      // 1. Sanitasi nama file (hapus karakter spesial & spasi)
+      const fileExt = uploadedFile.name.split(".").pop();
+      const fileName = `${Date.now()}_${Math.random().toString(36).substring(7)}.${fileExt}`;
+      const filePath = fileName; // Langsung simpan di root atau folder 'products/'
 
-          const { error } = await supabase.storage
-            .from("products")
-            .upload(filePath, buffer, {
-              contentType: uploadedFile.type,
-              upsert: false
-            });
+      // 2. Gunakan ArrayBuffer (lebih aman di Vercel/Node.js)
+      const arrayBuffer = await uploadedFile.arrayBuffer();
 
-          if (error) throw error;
+      // 3. Upload ke Supabase
+      const { data: uploadData, error: uploadError } = await supabase.storage
+        .from("products")
+        .upload(filePath, arrayBuffer, {
+          contentType: uploadedFile.type,
+          upsert: false,
+        });
 
-          const { data } = supabase.storage.from("products").getPublicUrl(filePath);
-          imageUrl = data.publicUrl;
-        } catch (err) {
-          console.error("Supabase upload error:", err);
-          imageUrl = "https://via.placeholder.com/400x400?text=Produk+Lokal";
-        }
-      } else {
-        imageUrl = "https://via.placeholder.com/400x400?text=Produk+Lokal";
+      if (uploadError) {
+        console.error("Supabase Upload Error Details:", uploadError);
+        // Jika upload gagal, kita lempar error agar tidak lanjut ke DB
+        throw new Error(`Upload storage gagal: ${uploadError.message}`);
       }
-    } else {
-      imageUrl = "https://via.placeholder.com/400x400?text=Produk+Tanpa+Gambar";
+
+      // 4. Ambil Public URL
+      const { data } = supabase.storage.from("products").getPublicUrl(filePath);
+      imageUrl = data.publicUrl;
     }
 
+    // 5. Simpan ke Database
     const [result]: any = await db.execute(
       `INSERT INTO products (name, category, size, stock, price, image_url)
        VALUES (?, ?, ?, ?, ?, ?)`,
@@ -80,12 +80,12 @@ export async function POST(req: Request) {
     return NextResponse.json({
       message: "Produk berhasil ditambahkan",
       productId: result.insertId,
-      imageUrl
+      imageUrl,
     });
-  } catch (error) {
-    console.error("PRODUCT ERROR:", error);
+  } catch (error: any) {
+    console.error("PRODUCT POST ERROR:", error);
     return NextResponse.json(
-      { message: "Terjadi kesalahan server", error: String(error) },
+      { message: "Terjadi kesalahan server", error: error.message || String(error) },
       { status: 500 }
     );
   }
@@ -111,9 +111,7 @@ export async function DELETE(req: Request) {
   }
 }
 
-
-// PATCH -> update produk (contoh: nama, kategori, harga, stok)
-
+// PATCH -> update produk
 export async function PATCH(req: Request) {
   try {
     const body = await req.json();
