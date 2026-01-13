@@ -66,23 +66,31 @@ export default function EditProductPage() {
     setLoading(true);
 
     try {
+      const formData = new FormData();
+      formData.append("id", productId.toString());
+      formData.append("name", name);
+      formData.append("category", category);
+      formData.append("size", size);
+      formData.append("stock", stock);
+      formData.append("price", price);
+
+      // kalau user upload gambar baru
+      if (file) {
+        formData.append("image", file);
+      }
+
       const res = await fetch("/api/products", {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          id: productId,
-          name,
-          category,
-          size,
-          stock: parseInt(stock),
-          price: parseFloat(price),
-        }),
+        method: "PUT",
+        body: formData,
+        // jangan set Content-Type manual kalau pakai FormData
       });
 
       const data = await res.json();
       alert(data.message);
 
-      if (res.ok) router.push("/admin/produk");
+      if (res.ok) {
+        router.push("/admin/produk");
+      }
     } catch (error) {
       console.error(error);
       alert("Terjadi kesalahan saat update produk");
@@ -90,6 +98,7 @@ export default function EditProductPage() {
 
     setLoading(false);
   };
+
 
   return (
     <section className="min-h-screen w-full flex items-center px-6 pt-16 pb-16">
@@ -112,8 +121,8 @@ export default function EditProductPage() {
                   {file
                     ? `File dipilih: ${file.name}`
                     : imageUrl
-                    ? "Foto saat ini"
-                    : "Belum ada file dipilih"}
+                      ? "Foto saat ini"
+                      : "Belum ada file dipilih"}
                 </p>
               </span>
             </label>
@@ -166,9 +175,8 @@ export default function EditProductPage() {
           <button
             onClick={handleSubmit}
             disabled={loading}
-            className={`w-full border mt-2 text-center font-poppins text-white text-lg rounded-xl bg-green-500 border-green-500 cursor-pointer hover:border-green-700 hover:bg-green-700 duration-200 hover:shadow-xl py-1 font-semibold ${
-              loading ? "opacity-50 cursor-not-allowed" : ""
-            }`}
+            className={`w-full border mt-2 text-center font-poppins text-white text-lg rounded-xl bg-green-500 border-green-500 cursor-pointer hover:border-green-700 hover:bg-green-700 duration-200 hover:shadow-xl py-1 font-semibold ${loading ? "opacity-50 cursor-not-allowed" : ""
+              }`}
           >
             {loading ? "Menyimpan..." : "Update"}
           </button>
