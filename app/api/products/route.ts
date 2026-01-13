@@ -10,6 +10,22 @@ const supabase = createClient(
   process.env.SUPABASE_SERVICE_ROLE_KEY!
 );
 
+/* GET -> ambil semua produk */
+export async function GET() {
+  try {
+    const [rows] = await db.execute(
+      `SELECT * FROM products ORDER BY created_at DESC`
+    );
+    return NextResponse.json({ products: rows });
+  } catch (err) {
+    console.error("GET PRODUCTS ERROR:", err);
+    return NextResponse.json(
+      { message: "Gagal mengambil produk" },
+      { status: 500 }
+    );
+  }
+}
+
 /* POST -> tambah produk */
 export async function POST(req: Request) {
   try {
@@ -20,66 +36,98 @@ export async function POST(req: Request) {
     const size = formData.get("size")?.toString().trim() || null;
     const stock = Number(formData.get("stock"));
     const price = Number(formData.get("price"));
-    const file = formData.get("image") as File;
+    const file = formData.get("image") as File | null;
 
-    // VALIDASI KETAT
-    if (
-      !name ||
-      !category ||
-      stock < 0 ||
-      price <= 0 ||
-      !file ||
-      file.size === 0
-    ) {
+    console.log("📦 Data yang diterima:", { name, category, size, stock, price });
+    console.log("📷 File yang diterima:", file ? {
+      name: file.name,
+      size: file.size,
+      type: file.type
+    } : "Tidak ada file");
+
+    // VALIDASI DATA
+    if (!name || !category || isNaN(stock) || stock < 0 || isNaN(price) || price <= 0) {
       return NextResponse.json(
-        { message: "Data atau file tidak valid" },
+        { message: "Data tidak valid. Pastikan semua field terisi dengan benar." },
         { status: 400 }
       );
     }
 
-    // DEBUG (boleh hapus nanti)
-    console.log("UPLOAD FILE:", {
-      name: file.name,
-      size: file.size,
-      type: file.type,
-    });
+    // VALIDASI FILE
+    if (!file || file.size === 0) {
+      return NextResponse.json(
+        { message: "File gambar wajib diupload!" },
+        { status: 400 }
+      );
+    }
 
+    // Validasi tipe file
+    const allowedTypes = ["image/jpeg", "image/jpg", "image/png", "image/webp"];
+    if (!allowedTypes.includes(file.type)) {
+      return NextResponse.json(
+        { message: "Format file tidak didukung. Gunakan JPG, PNG, atau WebP." },
+        { status: 400 }
+      );
+    }
+
+    // Validasi ukuran file (max 2MB)
+    if (file.size > 2 * 1024 * 1024) {
+      return NextResponse.json(
+        { message: "Ukuran file terlalu besar. Maksimal 2MB." },
+        { status: 400 }
+      );
+    }
+
+    console.log("✅ Validasi berhasil, mulai upload ke Supabase...");
+
+    // UPLOAD KE SUPABASE STORAGE
     const ext = file.name.split(".").pop();
-    const filePath = `${Date.now()}.${ext}`;
+    const fileName = `${Date.now()}-${Math.random().toString(36).substring(7)}.${ext}`;
     const buffer = Buffer.from(await file.arrayBuffer());
 
-    const { error: uploadError } = await supabase.storage
+    const { data: uploadData, error: uploadError } = await supabase.storage
       .from("products")
-      .upload(filePath, buffer, {
+      .upload(fileName, buffer, {
         contentType: file.type,
         upsert: false,
       });
 
     if (uploadError) {
-      console.error("SUPABASE UPLOAD ERROR:", uploadError);
-      return NextResponse.json({ uploadError }, { status: 500 });
+      console.error("❌ SUPABASE UPLOAD ERROR:", uploadError);
+      return NextResponse.json(
+        { message: `Gagal upload gambar: ${uploadError.message}` },
+        { status: 500 }
+      );
     }
 
-    const { data } = supabase.storage
+    console.log("✅ Upload berhasil:", uploadData);
+
+    // GET PUBLIC URL
+    const { data: urlData } = supabase.storage
       .from("products")
-      .getPublicUrl(filePath);
+      .getPublicUrl(fileName);
 
-    const imageUrl = data.publicUrl;
+    const imageUrl = urlData.publicUrl;
+    console.log("🔗 URL Gambar:", imageUrl);
 
-    await db.execute(
+    // SIMPAN KE DATABASE
+    const [result] = await db.execute(
       `INSERT INTO products (name, category, size, stock, price, image_url)
        VALUES (?, ?, ?, ?, ?, ?)`,
       [name, category, size, stock, price, imageUrl]
     );
 
+    console.log("✅ Data berhasil disimpan ke database");
+
     return NextResponse.json({
       message: "Produk berhasil ditambahkan",
       imageUrl,
+      productId: (result as any).insertId
     });
   } catch (err) {
-    console.error("POST PRODUCT ERROR:", err);
+    console.error("❌ POST PRODUCT ERROR:", err);
     return NextResponse.json(
-      { message: "Gagal menambahkan produk" },
+      { message: `Gagal menambahkan produk: ${err instanceof Error ? err.message : 'Unknown error'}` },
       { status: 500 }
     );
   }

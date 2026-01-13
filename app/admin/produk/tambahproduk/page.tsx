@@ -6,6 +6,7 @@ import Link from "next/link";
 export default function AddProductPage() {
   const [file, setFile] = useState<File | null>(null);
   const [fileKey, setFileKey] = useState(0);
+  const [preview, setPreview] = useState<string | null>(null);
 
   const [name, setName] = useState("");
   const [category, setCategory] = useState("");
@@ -13,20 +14,46 @@ export default function AddProductPage() {
   const [stock, setStock] = useState("");
   const [price, setPrice] = useState("");
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const selectedFile = e.target.files?.[0] || null;
+    setFile(selectedFile);
+    setError(null);
+
+    // Buat preview
+    if (selectedFile) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setPreview(reader.result as string);
+      };
+      reader.readAsDataURL(selectedFile);
+    } else {
+      setPreview(null);
+    }
+  };
 
   const handleSubmit = async () => {
+    setError(null);
+
     if (!name || !category || !stock || !price) {
-      alert("Isi semua field wajib!");
+      setError("Isi semua field wajib!");
       return;
     }
 
     if (!file) {
-      alert("Foto produk wajib diupload!");
+      setError("Foto produk wajib diupload!");
       return;
     }
 
     if (file.size > 2 * 1024 * 1024) {
-      alert("Ukuran gambar maksimal 2MB");
+      setError("Ukuran gambar maksimal 2MB");
+      return;
+    }
+
+    const allowedTypes = ["image/jpeg", "image/jpg", "image/png", "image/webp"];
+    if (!allowedTypes.includes(file.type)) {
+      setError("Format file tidak didukung. Gunakan JPG, PNG, atau WebP.");
       return;
     }
 
@@ -41,26 +68,41 @@ export default function AddProductPage() {
       formData.append("price", price);
       formData.append("image", file);
 
+      console.log("📤 Mengirim data produk...");
+      console.log("📷 File:", {
+        name: file.name,
+        size: file.size,
+        type: file.type,
+      });
+
       const res = await fetch("/api/products", {
         method: "POST",
         body: formData,
       });
 
       const data = await res.json();
-      alert(data.message);
+      
+      console.log("📥 Response:", data);
 
       if (res.ok) {
+        alert("✅ " + data.message);
+        console.log("🔗 URL Gambar:", data.imageUrl);
+        
+        // Reset form
         setName("");
         setCategory("");
         setSize("");
         setStock("");
         setPrice("");
         setFile(null);
-        setFileKey((prev) => prev + 1); // reset input file
+        setPreview(null);
+        setFileKey((prev) => prev + 1);
+      } else {
+        setError(data.message || "Gagal menambahkan produk");
       }
     } catch (error) {
-      console.error(error);
-      alert("Terjadi kesalahan");
+      console.error("❌ Error:", error);
+      setError("Terjadi kesalahan saat menghubungi server");
     }
 
     setLoading(false);
@@ -74,6 +116,26 @@ export default function AddProductPage() {
             Tambah Produk
           </h1>
 
+          {/* Error Message */}
+          {error && (
+            <div className="w-full bg-red-500 text-white px-4 py-3 rounded-xl mb-3 font-poppins">
+              ⚠️ {error}
+            </div>
+          )}
+
+          {/* Preview Image */}
+          {preview && (
+            <div className="w-full flex justify-center mb-3">
+              <div className="relative w-48 h-48 rounded-xl overflow-hidden border-2 border-ivory">
+                <img
+                  src={preview}
+                  alt="Preview"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            </div>
+          )}
+
           {/* Upload File */}
           <div className="w-full flex items-center justify-center mb-3">
             <label
@@ -84,7 +146,7 @@ export default function AddProductPage() {
                 <span>📤</span>
                 <h1>Upload Foto Produk</h1>
                 <p className="text-ivory font-poppins text-sm -mt-2.5 mb-3 text-center">
-                  {file ? `File dipilih: ${file.name}` : "Belum ada file dipilih"}
+                  {file ? `✅ ${file.name} (${(file.size / 1024).toFixed(1)} KB)` : "Belum ada file dipilih"}
                 </p>
               </span>
             </label>
@@ -92,9 +154,9 @@ export default function AddProductPage() {
               key={fileKey}
               id="uploadFoto"
               type="file"
-              accept="image/*"
+              accept="image/jpeg,image/jpg,image/png,image/webp"
               className="hidden"
-              onChange={(e) => setFile(e.target.files?.[0] || null)}
+              onChange={handleFileChange}
             />
           </div>
 
