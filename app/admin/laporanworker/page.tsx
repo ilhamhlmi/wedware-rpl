@@ -6,6 +6,8 @@ import AdminNavbar from "@/app/components/AdminNavbar";
 
 type LaporanWorker = {
   id: number;
+  order_id: number;
+  product_name: string | null;
   bukti_pembayaran: string;
   created_at: string;
   nama_pengguna: string;
@@ -73,6 +75,14 @@ export default function LaporanWorker() {
                 <h1 className="font-poppins text-neutral-900">
                   Tgl Laporan:{" "}
                   {new Date(item.created_at).toLocaleDateString("id-ID")}
+                </h1>
+
+                <h1 className="font-poppins text-neutral-900">
+                  Order ID: {item.order_id}
+                </h1>
+
+                <h1 className="font-poppins text-neutral-900">
+                  Produk: {item.product_name ?? "-"}
                 </h1>
 
                 <h1 className="font-poppins text-neutral-900">
