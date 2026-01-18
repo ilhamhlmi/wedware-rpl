@@ -36,24 +36,24 @@ export function middleware(request: NextRequest) {
   // === PROTECTED AREA ===
 
   // ADMIN AREA
-  if (pathname.startsWith("/admin") && pathname !== "/admin/login") {
-    if (!adminId || adminRole !== "admin") {
-      return NextResponse.redirect(
-        new URL("/admin/login", request.url)
-      );
-    }
-    return NextResponse.next();
-  }
+  // if (pathname.startsWith("/admin") && pathname !== "/admin/login") {
+  //   if (!adminId || adminRole !== "admin") {
+  //     return NextResponse.redirect(
+  //       new URL("/admin/login", request.url)
+  //     );
+  //   }
+  //   return NextResponse.next();
+  // }
 
   // WORKER AREA
-  if (pathname.startsWith("/worker") && pathname !== "/worker/login") {
-    if (!workerId || workerRole !== "worker") {
-      return NextResponse.redirect(
-        new URL("/worker/login", request.url)
-      );
-    }
-    return NextResponse.next();
-  }
+  // if (pathname.startsWith("/worker") && pathname !== "/worker/login") {
+  //   if (!workerId || workerRole !== "worker") {
+  //     return NextResponse.redirect(
+  //       new URL("/worker/login", request.url)
+  //     );
+  //   }
+  //   return NextResponse.next();
+  // }
 
   return NextResponse.next();
 }
